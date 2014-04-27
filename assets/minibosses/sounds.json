@@ -1,0 +1,23 @@
+{
+	"crawlerliving": {
+		"catagory": "master",
+		"sounds": [{
+			"name": "crawlerliving",
+			"stream": "false"
+		}]
+	},
+	"crawlerhurt": {
+		"catagory": "master",
+		"sounds": [{
+			"name": "cralwerhurt",
+			"stream": "false"
+		}]
+	},
+	"crawlerdeath": {
+		"catagory": "master",
+		"sounds": [{
+			"name": "crawlerdeath",
+			"stream": "false"
+		}]
+	}
+}
