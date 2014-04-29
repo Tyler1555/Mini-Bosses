@@ -11,11 +11,12 @@ public class ConfigHelper {
 		
 	}
 	
-	public static boolean allowSlimeBlockCrafting = true;
+	public static boolean allowSlimeBlockCrafting = false;
 	public static int ironZombieSpawnRate = 10;
 	public static int forestGuardSpawnRate = 10;
 	public static int crawlerSpawnRate = 10;
 	public static int superSlimeSpawnRate = 10;
+	public static int stealthCreeperSpawnRate = 10;
 	
 	public static void setupConfig(Configuration config, Logger logger) {
 		try {
@@ -25,6 +26,7 @@ public class ConfigHelper {
 			forestGuardSpawnRate = config.get("Spawning", "forestGuardSpawnRate", 10).getInt(10);
 			crawlerSpawnRate = config.get("Spawning", "crawlerSpawnRate", 10).getInt(10);
 			superSlimeSpawnRate = config.get("Spawning", "superSlimeSpawnRate", 10).getInt(10);
+			stealthCreeperSpawnRate = config.get("Spawning", "stealthCreeperSpawnRate", 10).getInt(10);
 		} catch(Exception e) {
 			logger.log(Level.ERROR, "A severe error has occured when attempting to load the config file for this mod! Some options may not be the way you set them!");
 		} finally {

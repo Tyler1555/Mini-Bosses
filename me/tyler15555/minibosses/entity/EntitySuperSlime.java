@@ -1,9 +1,12 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -57,6 +60,19 @@ public class EntitySuperSlime extends EntitySlime {
 			return Resources.entityBlockList.get("SuperSlime") == this.worldObj.provider.dimensionId;
 		} else {
 			return true;
+		}
+	}
+	
+	@Override
+	public Item getDropItem() {
+		return Item.getItemFromBlock(MBBlocks.blockSlime);
+	}
+	
+	@Override
+	public void dropFewItems(boolean hitRecently, int looting) {
+		if(hitRecently) {
+			this.dropItem(Item.getItemFromBlock(MBBlocks.blockSlime), this.rand.nextInt(2));
+			this.dropItem(Items.slime_ball, this.rand.nextInt(9));
 		}
 	}
 

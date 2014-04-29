@@ -4,6 +4,7 @@ import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
+import me.tyler15555.minibosses.entity.EntityStealthCreeper;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
@@ -70,11 +71,13 @@ public class MiniBosses {
 		EntityRegistry.registerModEntity(EntitySuperSlime.class, "MB-SuperSlime", 2, this, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityForestGuard.class, "MB-ForestGuard", 3, this, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityCrawler.class, "MB-Crawler", 4, this, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityStealthCreeper.class, "MB-StealthCreeper", 5, this, 53, 3, true);
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		EntityRegistry.addSpawn(EntityForestGuard.class, ConfigHelper.forestGuardSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.FOREST));
 		EntityRegistry.addSpawn(EntityCrawler.class, ConfigHelper.crawlerSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.HILLS));
+		EntityRegistry.addSpawn(EntityStealthCreeper.class, ConfigHelper.stealthCreeperSpawnRate, 1, 1, EnumCreatureType.creature, BiomeDictionary.getBiomesForType(Type.JUNGLE));
 		
 		if(ConfigHelper.allowSlimeBlockCrafting) {
 			GameRegistry.addRecipe(new ItemStack(MBBlocks.blockSlime, 2), new Object[] {"sss", "sss", "sss", 's', Items.slime_ball});
