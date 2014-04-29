@@ -28,11 +28,6 @@ public class MBEventHandler {
 				entity.setCustomNameTag(Resources.generateRandomName(random));
 			}
 		}
-		if(event.entity instanceof EntityPlayer) {
-			EntityCrawler crawler = new EntityCrawler(event.world);
-			crawler.copyLocationAndAnglesFrom(event.entity);
-			event.world.spawnEntityInWorld(crawler);
-		}
 	}
 	
 }
