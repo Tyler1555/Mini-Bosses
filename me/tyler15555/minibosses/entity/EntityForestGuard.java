@@ -2,8 +2,11 @@ package me.tyler15555.minibosses.entity;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -78,28 +81,30 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	public void setDead() {
 		super.setDead();
 		
-		int treeSpawnCounter = 0;
-		int x = (int)this.posX;
-		int y = (int)this.posY;
-		int z = (int)this.posZ;
-		
-		for(int i = 0; i < 5; i++) {
-			this.worldObj.setBlock(x, y + i, z, Blocks.log);
-		}
-		this.worldObj.setBlock(x, y + 5, z, Blocks.leaves);
-		this.worldObj.setBlock(x + 1, y + 4, z, Blocks.leaves);
-		this.worldObj.setBlock(x - 1, y + 4, z, Blocks.leaves);
-		this.worldObj.setBlock(x, y + 4, z + 1, Blocks.leaves);
-		this.worldObj.setBlock(x, y + 4, z - 1, Blocks.leaves);
-		this.worldObj.setBlock(x, y + 6, z, Blocks.chest);
-		
-		TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(x, y + 6, z);
-		if(chest != null) {
-			ItemStack stack = new ItemStack(Items.diamond_axe);
-			EnchantmentHelper.addRandomEnchantment(rand, stack, 2);
-			chest.setInventorySlotContents(1, stack);
-			chest.setInventorySlotContents(0, new ItemStack(Blocks.sapling));
-			chest.setInventorySlotContents(2, new ItemStack(Items.bone, 4));
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			int treeSpawnCounter = 0;
+			int x = (int)this.posX;
+			int y = (int)this.posY;
+			int z = (int)this.posZ;
+			
+			for(int i = 0; i < 5; i++) {
+				this.worldObj.setBlock(x, y + i, z, Blocks.log);
+			}
+			this.worldObj.setBlock(x, y + 5, z, Blocks.leaves);
+			this.worldObj.setBlock(x + 1, y + 4, z, Blocks.leaves);
+			this.worldObj.setBlock(x - 1, y + 4, z, Blocks.leaves);
+			this.worldObj.setBlock(x, y + 4, z + 1, Blocks.leaves);
+			this.worldObj.setBlock(x, y + 4, z - 1, Blocks.leaves);
+			this.worldObj.setBlock(x, y + 6, z, Blocks.chest);
+			
+			TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(x, y + 6, z);
+			if(chest != null) {
+				ItemStack stack = new ItemStack(Items.diamond_axe);
+				EnchantmentHelper.addRandomEnchantment(rand, stack, 2);
+				chest.setInventorySlotContents(1, stack);
+				chest.setInventorySlotContents(0, new ItemStack(Blocks.sapling));
+				chest.setInventorySlotContents(2, new ItemStack(Items.bone, 4));
+			}
 		}
 	}
 
@@ -119,6 +124,7 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 		return ret;
 	}
 	
+	/*
 	@Override
 	public boolean getCanSpawnHere() {
 		super.getCanSpawnHere();
@@ -127,5 +133,5 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 		} else {
 			return true;
 		}
-	}
+	} */
 }

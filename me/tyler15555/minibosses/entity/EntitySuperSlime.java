@@ -52,6 +52,7 @@ public class EntitySuperSlime extends EntitySlime {
 			}
 		}
 	}
+	/*
 	
 	@Override
 	public boolean getCanSpawnHere() {
@@ -61,7 +62,7 @@ public class EntitySuperSlime extends EntitySlime {
 		} else {
 			return true;
 		}
-	}
+	} */
 	
 	@Override
 	public Item getDropItem() {

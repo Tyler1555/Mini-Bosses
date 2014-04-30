@@ -82,6 +82,7 @@ public class EntityIronZombie extends EntityZombie {
 		return true;
 	}
 	
+	/*
 	@Override
 	public boolean getCanSpawnHere() {
 		super.getCanSpawnHere();
@@ -90,7 +91,7 @@ public class EntityIronZombie extends EntityZombie {
 		} else {
 			return true;
 		}
-	}
+	} */
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {

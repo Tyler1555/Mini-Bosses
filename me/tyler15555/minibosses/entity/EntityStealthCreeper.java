@@ -34,6 +34,7 @@ public class EntityStealthCreeper extends EntityCreeper {
 		return Items.golden_carrot;
 	}
 	
+	/*
 	@Override
 	public boolean getCanSpawnHere() {
 		if(Resources.entityBlockList.containsKey("StealthCreeper")) {
@@ -42,6 +43,6 @@ public class EntityStealthCreeper extends EntityCreeper {
 			}
 		}
 		return super.getCanSpawnHere();
-	}
+	} */
 
 }

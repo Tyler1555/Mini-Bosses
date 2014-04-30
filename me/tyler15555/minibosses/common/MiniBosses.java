@@ -76,7 +76,7 @@ public class MiniBosses {
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		EntityRegistry.addSpawn(EntityForestGuard.class, ConfigHelper.forestGuardSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.FOREST));
-		EntityRegistry.addSpawn(EntityCrawler.class, ConfigHelper.crawlerSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.HILLS));
+		EntityRegistry.addSpawn(EntityCrawler.class, ConfigHelper.crawlerSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntityStealthCreeper.class, ConfigHelper.stealthCreeperSpawnRate, 1, 1, EnumCreatureType.creature, BiomeDictionary.getBiomesForType(Type.JUNGLE));
 		
 		if(ConfigHelper.allowSlimeBlockCrafting) {
