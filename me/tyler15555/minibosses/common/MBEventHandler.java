@@ -9,7 +9,10 @@ import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -29,6 +32,19 @@ public class MBEventHandler {
 				props.applyToEntity(entity);
 				entity.setCustomNameTag(Resources.generateRandomName(random));
 			}
+		}
+		if(event.entity instanceof EntityHorse && !event.world.isRemote && random.nextInt(19) == 1) {
+			EntityHorse horse = (EntityHorse)event.entity;
+			EntitySkeleton skeleton = new EntitySkeleton(event.world);
+			
+			horse.setHorseType(4);
+			skeleton.setSkeletonType(0);
+			skeleton.copyLocationAndAnglesFrom(horse);
+			event.world.spawnEntityInWorld(skeleton);
+			horse.setOwnerName(skeleton.getCommandSenderName());
+			horse.setHorseTamed(true);
+			skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+			skeleton.mountEntity(horse);
 		}
 	}
 	
