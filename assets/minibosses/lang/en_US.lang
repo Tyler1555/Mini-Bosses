@@ -1,6 +1,8 @@
-entity.MiniBosses.MB-IronZombie.name=Iron Zombie
-entity.MiniBosses.MB-SuperSlime.name=Super Slime
-entity.MiniBosses.MB-ForestGuard.name=Forest Guard
+entity.MB-IronZombie.name=Iron Zombie
+entity.MB-SuperSlime.name=Super Slime
+entity.MB-ForestGuard.name=Forest Guard
+entity.MB-Crawler.name=Crawler
+entity.MB-StealthCreeper.name=Stealth Creeper
 itemGroup.MiniBosses=Minibosses - Items & Blocks
 item.darkIronHelm.name=Dark Iron Helmet
 item.darkIronChest.name=Dark Iron Chestplate
@@ -8,3 +10,4 @@ item.darkIronLegs.name=Dark Iron Leggings
 item.darkIronBoots.name=Dark Iron Boots
 item.ingotDarkIron.name=Dark Iron Ingot
 tile.blockSlime.name=Slime Block
+tile.blockOcculus.name=Occulus Block

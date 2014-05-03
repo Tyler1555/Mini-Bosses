@@ -40,7 +40,7 @@ public class EntityCrawler extends EntityMob {
 	@Override
 	protected void attackEntity(Entity entity, float par2) {
 		super.attackEntity(entity, par2);
-		if(this.rand.nextInt(74) == 1 && !this.worldObj.isRemote) {
+		if(this.rand.nextInt(99) == 1 && !this.worldObj.isRemote) {
 			for(int i = 0; i < 3; i++) {
 				EntitySpider spider = new EntitySpider(this.worldObj);
 				spider.copyLocationAndAnglesFrom(entity);

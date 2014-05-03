@@ -1,5 +1,7 @@
 package me.tyler15555.minibosses.common;
 
+import java.awt.Color;
+
 import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
@@ -67,11 +69,11 @@ public class MiniBosses {
 		
 		MinecraftForge.EVENT_BUS.register(new MBEventHandler());
 		
-		EntityRegistry.registerModEntity(EntityIronZombie.class, "MB-IronZombie", 1, this, 64, 3, true);
-		EntityRegistry.registerModEntity(EntitySuperSlime.class, "MB-SuperSlime", 2, this, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityForestGuard.class, "MB-ForestGuard", 3, this, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityCrawler.class, "MB-Crawler", 4, this, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityStealthCreeper.class, "MB-StealthCreeper", 5, this, 53, 3, true);
+		EntityRegistry.registerGlobalEntityID(EntityIronZombie.class, "MB-IronZombie", EntityRegistry.findGlobalUniqueEntityId(), Color.GRAY.getRGB(), Color.BLACK.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntityCrawler.class, "MB-Crawler", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.BLACK.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntitySuperSlime.class, "MB-SuperSlime", EntityRegistry.findGlobalUniqueEntityId(), Color.GREEN.getRGB(), Color.CYAN.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntityForestGuard.class, "MB-ForestGuard", EntityRegistry.findGlobalUniqueEntityId(), Color.GREEN.getRGB(), Color.WHITE.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntityStealthCreeper.class, "MB-StealthCreeper", EntityRegistry.findGlobalUniqueEntityId(), Color.WHITE.getRGB(), Color.GRAY.getRGB());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
