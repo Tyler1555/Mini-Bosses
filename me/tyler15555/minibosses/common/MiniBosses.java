@@ -6,8 +6,10 @@ import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
+import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.entity.EntityStealthCreeper;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
+import me.tyler15555.minibosses.entity.EntityWatcher;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.MicroBossProperties;
@@ -74,6 +76,8 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntitySuperSlime.class, "MB-SuperSlime", EntityRegistry.findGlobalUniqueEntityId(), Color.GREEN.getRGB(), Color.CYAN.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityForestGuard.class, "MB-ForestGuard", EntityRegistry.findGlobalUniqueEntityId(), Color.GREEN.getRGB(), Color.WHITE.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityStealthCreeper.class, "MB-StealthCreeper", EntityRegistry.findGlobalUniqueEntityId(), Color.WHITE.getRGB(), Color.GRAY.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntityLivingBlock.class, "MB-LivingBlock", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "MB-Watcher", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.WHITE.getRGB());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));

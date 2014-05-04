@@ -4,6 +4,7 @@ package me.tyler15555.minibosses.client;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelWatcher extends ModelBase {
     ModelRenderer Body;
@@ -121,8 +122,51 @@ public class ModelWatcher extends ModelBase {
     model.rotateAngleZ = z;
   }
   
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+  public void setRotationAngles(float time, float moveSpeed, float par3, float yaw, float pitch, float f5, Entity entity) {
+    super.setRotationAngles(time, moveSpeed, par3, yaw, pitch, f5, entity);
+    float f6 = ((float)Math.PI / 4F);
+    this.Leg1.rotateAngleZ = -f6;
+    this.Leg2.rotateAngleZ = f6;
+    this.Leg3.rotateAngleZ = -f6 * 0.74F;
+    this.Leg4.rotateAngleZ = f6 * 0.74F;
+    this.Leg5.rotateAngleZ = -f6 * 0.74F;
+    this.Leg6.rotateAngleZ = f6 * 0.74F;
+    this.Leg7.rotateAngleZ = -f6;
+    this.Leg8.rotateAngleZ = f6;
+    float f7 = -0.0F;
+    float f8 = 0.3926991F;
+    this.Leg1.rotateAngleY = f8 * 3.0F + f7;
+    this.Leg2.rotateAngleY = -f8 * 3.0F - f7;
+    this.Leg3.rotateAngleY = f8 * 2.0F + f7;
+    this.Leg4.rotateAngleY = -f8 * 2.0F - f7;
+    this.Leg5.rotateAngleY = -f8 * 2.0F + f7;
+    this.Leg6.rotateAngleY = f8 * 2.0F - f7;
+    this.Leg7.rotateAngleY = -f8 * 3.0F + f7;
+    this.Leg8.rotateAngleY = f8 * 3.0F - f7;
+    float f9 = -(MathHelper.cos(time * 0.6662F * 2.0F + 0.0F) * 0.4F) * moveSpeed;
+    float f10 = -(MathHelper.cos(time * 0.6662F * 2.0F + (float)Math.PI) * 0.4F) * moveSpeed;
+    float f11 = -(MathHelper.cos(time * 0.6662F * 2.0F + ((float)Math.PI / 2F)) * 0.4F) * moveSpeed;
+    float f12 = -(MathHelper.cos(time * 0.6662F * 2.0F + ((float)Math.PI * 3F / 2F)) * 0.4F) * moveSpeed;
+    float f13 = Math.abs(MathHelper.sin(time * 0.6662F + 0.0F) * 0.4F) * moveSpeed;
+    float f14 = Math.abs(MathHelper.sin(time * 0.6662F + (float)Math.PI) * 0.4F) * moveSpeed;
+    float f15 = Math.abs(MathHelper.sin(time * 0.6662F + ((float)Math.PI / 2F)) * 0.4F) * moveSpeed;
+    float f16 = Math.abs(MathHelper.sin(time * 0.6662F + ((float)Math.PI * 3F / 2F)) * 0.4F) * moveSpeed;
+    this.Leg1.rotateAngleY += f9;
+    this.Leg2.rotateAngleY += -f9;
+    this.Leg3.rotateAngleY += f10;
+    this.Leg4.rotateAngleY += -f10;
+    this.Leg5.rotateAngleY += f11;
+    this.Leg6.rotateAngleY += -f11;
+    this.Leg7.rotateAngleY += f12;
+    this.Leg8.rotateAngleY += -f12;
+    this.Leg1.rotateAngleZ += f13;
+    this.Leg2.rotateAngleZ += -f13;
+    this.Leg3.rotateAngleZ += f14;
+    this.Leg4.rotateAngleZ += -f14;
+    this.Leg5.rotateAngleZ += f15;
+    this.Leg6.rotateAngleZ += -f15;
+    this.Leg7.rotateAngleZ += f16;
+    this.Leg8.rotateAngleZ += -f16;
   }
 
 }

@@ -23,6 +23,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -43,6 +45,7 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	public void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(12, Integer.valueOf(0));
+		this.dataWatcher.addObject(13, Integer.valueOf(0));
 	}
 	
 	@Override
@@ -58,12 +61,14 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("shearCount", this.dataWatcher.getWatchableObjectInt(12));
+		tag.setInteger("hasBeenAttacked", this.getDataWatcher().getWatchableObjectInt(13));
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		this.getDataWatcher().updateObject(12, Integer.valueOf(tag.getInteger("shearCount")));
+		this.dataWatcher.updateObject(13, Integer.valueOf(tag.getInteger("hasBeenAttacked")));
 	}
 	
 	@Override
@@ -78,10 +83,19 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	}
 	
 	@Override
+	public boolean attackEntityFrom(DamageSource source, float damage) {
+		super.attackEntityFrom(source, damage);
+		if(source instanceof EntityDamageSource) {
+			this.getDataWatcher().updateObject(13, Integer.valueOf(1));
+		}
+		return true;
+	}
+	
+	@Override
 	public void setDead() {
 		super.setDead();
 		
-		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && this.getDataWatcher().getWatchableObjectInt(13) == 1) {
 			int treeSpawnCounter = 0;
 			int x = (int)this.posX;
 			int y = (int)this.posY;

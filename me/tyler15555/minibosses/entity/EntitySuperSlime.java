@@ -14,7 +14,7 @@ public class EntitySuperSlime extends EntitySlime {
 
 	public EntitySuperSlime(World par1World) {
 		super(par1World);
-		this.setSlimeSize(MathHelper.getRandomIntegerInRange(rand, 10, 20));
+		this.setSlimeSize(MathHelper.getRandomIntegerInRange(rand, 10, 14));
 	}
 	
 	@Override
