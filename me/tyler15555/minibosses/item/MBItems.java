@@ -14,5 +14,6 @@ public class MBItems {
 	public static Item darkIronChest = new ItemDarkIronArmor(1).setUnlocalizedName("darkIronChest").setTextureName("minibosses:dark_iron_chest");
 	public static Item darkIronLegs = new ItemDarkIronArmor(2).setUnlocalizedName("darkIronLegs").setTextureName("minibosses:dark_iron_legs");
 	public static Item darkIronBoots = new ItemDarkIronArmor(3).setUnlocalizedName("darkIronBoots").setTextureName("minibosses:dark_iron_boots");
+	public static Item occulus_item = new ItemOcculus();
 
 }

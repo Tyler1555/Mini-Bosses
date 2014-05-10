@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.item.MBItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -10,6 +11,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -44,6 +46,11 @@ public class EntityWatcher extends EntityMob {
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id, 600));
 			player.addPotionEffect(new PotionEffect(Potion.confusion.id, 600));
 		}
+	}
+	
+	@Override
+	public Item getDropItem() {
+		return MBItems.occulus_item;
 	}
 
 }

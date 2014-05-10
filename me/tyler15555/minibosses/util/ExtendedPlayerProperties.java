@@ -37,5 +37,9 @@ public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 	public int getAbilityUsageAmount() {
 		return currentAbilitySaveCount;
 	}
+	
+	public void setAbilityUsage(int amt) {
+		lastAbilitySaveCount = amt;
+	}
 
 }

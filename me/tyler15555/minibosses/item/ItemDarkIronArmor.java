@@ -56,16 +56,16 @@ public class ItemDarkIronArmor extends ItemArmor implements ISpecialArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack armor) {
 		if(!world.isDaytime()) {
 			if(armor.getItem() == MBItems.darkIronHelm) {
-				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 20));
+				player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 500));
 			}
 			if(armor.getItem() == MBItems.darkIronChest) {
-				player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 5));
+				player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 500));
 			}
 			if(armor.getItem() == MBItems.darkIronLegs) {
-				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 5));
+				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 500));
 			}
 			if(armor.getItem() == MBItems.darkIronBoots) {
-				player.addPotionEffect(new PotionEffect(Potion.jump.id, 5));
+				player.addPotionEffect(new PotionEffect(Potion.jump.id, 500));
 			}
 		}
 	}

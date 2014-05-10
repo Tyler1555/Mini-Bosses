@@ -38,7 +38,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.0")
+@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.1")
 public class MiniBosses {
 
 	@Instance("MiniBosses")
@@ -59,6 +59,7 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.darkIronChest, "darkIronChest");
 		GameRegistry.registerItem(MBItems.darkIronLegs, "darkIronLegs");
 		GameRegistry.registerItem(MBItems.darkIronBoots, "darkIronBoots");
+		GameRegistry.registerItem(MBItems.occulus_item, "itemOcculus");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 	}

@@ -8,6 +8,7 @@ import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
 import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityHorse;
@@ -17,6 +18,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -76,6 +79,42 @@ public class MBEventHandler {
 				livingBlockStone.setBlockType(1);
 				livingBlockStone.setPosition(event.x, event.y, event.z);
 				event.world.spawnEntityInWorld(livingBlockStone);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void changeBreakSpeed(BreakSpeed speed) {
+		if(speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null) {
+			ExtendedPlayerProperties props = (ExtendedPlayerProperties) speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME);
+			
+			if(props.getAbilityUsageAmount() > 0) {
+				speed.newSpeed = speed.originalSpeed * 2;
+				
+				if(random.nextInt(149) == 1) {
+					props.decreaseAbilityUsage();
+				}
+			} else {
+				speed.newSpeed = speed.originalSpeed;
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingAttack(LivingAttackEvent event) {
+		if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)event.source.getEntity();
+			
+			if(player.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null) {
+				ExtendedPlayerProperties props = (ExtendedPlayerProperties) player.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME);
+				
+				if(props.getAbilityUsageAmount() > 0 && random.nextInt(4) == 1) {
+					event.entityLiving.setPosition(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ + 10);
+					EntityLightningBolt lightning = new EntityLightningBolt(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+					
+					player.worldObj.spawnEntityInWorld(lightning);
+					props.decreaseAbilityUsage();
+				}
 			}
 		}
 	}
