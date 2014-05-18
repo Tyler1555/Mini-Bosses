@@ -38,7 +38,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.1")
+@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.1.1")
 public class MiniBosses {
 
 	@Instance("MiniBosses")

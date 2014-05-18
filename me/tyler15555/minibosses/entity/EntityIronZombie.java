@@ -74,7 +74,7 @@ public class EntityIronZombie extends EntityZombie {
 		if(source.getEntity() != null && source.getEntity() instanceof EntityPlayer) {
 			EntityPlayer entity = (EntityPlayer)source.getEntity();
 			
-			if(entity.getHeldItem() != null && this.rand.nextInt(19) == 1) {
+			if(entity.getHeldItem() != null && this.rand.nextInt(19) == 1 && this.getDistanceToEntity(entity) <= 5.5D && this.getHeldItem() == null) {
 				this.setCurrentItemOrArmor(0, entity.getHeldItem());
 				entity.destroyCurrentEquippedItem();
 			}
@@ -111,17 +111,26 @@ public class EntityIronZombie extends EntityZombie {
 	
 	@Override
 	protected Item getDropItem() {
-		if(this.isDarkIron()) {
-			return MBItems.ingotDarkIron;
-		} else {
-			return Item.getItemFromBlock(Blocks.iron_block);
-		}
+		return MBItems.ingotDarkIron;
 	}
 	
 	@Override
 	public void dropFewItems(boolean hitRecently, int looting) {
 		if(hitRecently) { //No mob farms for you
 			this.dropItem(MBItems.ingotDarkIron, this.rand.nextInt(2));
+		}
+	}
+	
+	@Override
+	public boolean canDespawn() {
+		return false;
+	}
+	
+	@Override
+	public void setDead() {
+		super.setDead();
+		if(this.getHeldItem() != null) {
+			this.dropItem(this.getHeldItem().getItem(), 1);
 		}
 	}
 

@@ -149,4 +149,9 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 			return true;
 		}
 	} */
+	
+	@Override
+	public boolean canDespawn() {
+		return false;
+	}
 }

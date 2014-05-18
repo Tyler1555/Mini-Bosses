@@ -4,6 +4,7 @@ import java.util.Random;
 
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
+import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
 import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
@@ -31,26 +32,28 @@ public class MBEventHandler {
 	
 	@SubscribeEvent
 	public void onEntitySpawn(EntityJoinWorldEvent event) {
-		if(event.entity instanceof EntityZombie || event.entity instanceof EntitySkeleton) {
-			if(random.nextInt(19) == 1) {
-				EntityLiving entity = (EntityLiving)event.entity;
-				MicroBossProperties props = MicroBossProperties.generateRandomProperties();
-				props.applyToEntity(entity);
-				entity.setCustomNameTag(Resources.generateRandomName(random));
+		if(ConfigHelper.microBossesEnabled) {
+			if(event.entity instanceof EntityZombie || event.entity instanceof EntitySkeleton) {
+				if(random.nextInt(19) == 1) {
+					EntityLiving entity = (EntityLiving)event.entity;
+					MicroBossProperties props = MicroBossProperties.generateRandomProperties();
+					props.applyToEntity(entity);
+					entity.setCustomNameTag(Resources.generateRandomName(random));
+				}
 			}
-		}
-		if(event.entity instanceof EntityHorse && !event.world.isRemote && random.nextInt(19) == 1) {
-			EntityHorse horse = (EntityHorse)event.entity;
-			EntitySkeleton skeleton = new EntitySkeleton(event.world);
-			
-			horse.setHorseType(4);
-			skeleton.setSkeletonType(0);
-			skeleton.copyLocationAndAnglesFrom(horse);
-			event.world.spawnEntityInWorld(skeleton);
-			horse.setOwnerName(skeleton.getCommandSenderName());
-			horse.setHorseTamed(true);
-			skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-			skeleton.mountEntity(horse);
+			if(event.entity instanceof EntityHorse && !event.world.isRemote && random.nextInt(19) == 1) {
+				EntityHorse horse = (EntityHorse)event.entity;
+				EntitySkeleton skeleton = new EntitySkeleton(event.world);
+				
+				horse.setHorseType(4);
+				skeleton.setSkeletonType(0);
+				skeleton.copyLocationAndAnglesFrom(horse);
+				event.world.spawnEntityInWorld(skeleton);
+				horse.setOwnerName(skeleton.getCommandSenderName());
+				horse.setHorseTamed(true);
+				skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+				skeleton.mountEntity(horse);
+			}
 		}
 	}
 	

@@ -44,5 +44,10 @@ public class EntityStealthCreeper extends EntityCreeper {
 		}
 		return super.getCanSpawnHere();
 	} */
+	
+	@Override
+	public boolean canDespawn() {
+		return false;
+	}
 
 }

@@ -52,5 +52,10 @@ public class EntityWatcher extends EntityMob {
 	public Item getDropItem() {
 		return MBItems.occulus_item;
 	}
+	
+	@Override
+	public boolean canDespawn() {
+		return false;
+	}
 
 }

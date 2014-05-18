@@ -12,6 +12,7 @@ public class ConfigHelper {
 	}
 	
 	public static boolean allowSlimeBlockCrafting = false;
+	public static boolean microBossesEnabled = true;
 	public static int ironZombieSpawnRate = 10;
 	public static int forestGuardSpawnRate = 10;
 	public static int crawlerSpawnRate = 10;
@@ -22,6 +23,7 @@ public class ConfigHelper {
 		try {
 			config.load();
 			allowSlimeBlockCrafting = config.get("General", "allowSlimeBlockCrafting", false).getBoolean(false);
+			microBossesEnabled = config.get("Entities", "microBossesEnabled", true).getBoolean(true);
 			ironZombieSpawnRate = config.get("Spawning", "ironZombieSpawnRate", 10).getInt(10);
 			forestGuardSpawnRate = config.get("Spawning", "forestGuardSpawnRate", 10).getInt(10);
 			crawlerSpawnRate = config.get("Spawning", "crawlerSpawnRate", 10).getInt(10);

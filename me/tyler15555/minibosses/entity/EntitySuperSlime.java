@@ -76,5 +76,10 @@ public class EntitySuperSlime extends EntitySlime {
 			this.dropItem(Items.slime_ball, this.rand.nextInt(9));
 		}
 	}
+	
+	@Override
+	public boolean canDespawn() {
+		return false;
+	}
 
 }

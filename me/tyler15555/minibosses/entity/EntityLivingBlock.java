@@ -69,5 +69,10 @@ public class EntityLivingBlock extends EntityMob {
 			return Item.getItemFromBlock(Blocks.dirt);
 		}
 	}
+	
+	@Override
+	public boolean canDespawn() {
+		return false;
+	}
 
 }
