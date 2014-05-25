@@ -142,11 +142,10 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	/*
 	@Override
 	public boolean getCanSpawnHere() {
-		super.getCanSpawnHere();
-		if(Resources.entityBlockList.containsKey("ForestGuard")) {
-			return Resources.entityBlockList.get("ForestGuard") == this.worldObj.provider.dimensionId;
+		if(Resources.entityBlockList.containsKey("ForestGuard") && Resources.entityBlockList.get("ForestGuard") == this.worldObj.provider.dimensionId) {
+			return false;
 		} else {
-			return true;
+			return super.getCanSpawnHere();
 		}
 	} */
 	

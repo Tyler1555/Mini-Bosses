@@ -10,6 +10,7 @@ import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityHorse;
@@ -53,6 +54,11 @@ public class MBEventHandler {
 				horse.setHorseTamed(true);
 				skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 				skeleton.mountEntity(horse);
+			}
+			if(event.entity instanceof EntityCreeper && random.nextInt(19) == 1) {
+				EntityCreeper creeper = (EntityCreeper)event.entity;
+				
+				creeper.getDataWatcher().updateObject(17, Byte.valueOf((byte)1));
 			}
 		}
 	}

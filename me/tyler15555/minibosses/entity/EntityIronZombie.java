@@ -63,7 +63,7 @@ public class EntityIronZombie extends EntityZombie {
 		return this.getDataWatcher().getWatchableObjectInt(15) == 1;
 	}
 	
-	@SideOnly(Side.SERVER)
+	
 	public void setDarkIron() {
 		this.getDataWatcher().updateObject(15, Integer.valueOf(1));
 	}
@@ -83,13 +83,11 @@ public class EntityIronZombie extends EntityZombie {
 	}
 	
 	/*
-	@Override
 	public boolean getCanSpawnHere() {
-		super.getCanSpawnHere();
-		if(Resources.entityBlockList.containsKey("IronZombie")) {
-			return Resources.entityBlockList.get("IronZombie") != this.worldObj.provider.dimensionId;
+		if(Resources.entityBlockList.containsKey("IronZombie") && Resources.entityBlockList.get("IronZombie") == this.worldObj.provider.dimensionId) {
+			return false;
 		} else {
-			return true;
+			return super.getCanSpawnHere();
 		}
 	} */
 	
