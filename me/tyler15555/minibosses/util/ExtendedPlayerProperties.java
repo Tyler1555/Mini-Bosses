@@ -9,6 +9,7 @@ public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 
 	private int lastAbilitySaveCount = 5;
 	private int currentAbilitySaveCount;
+	private boolean powersOn;
 	public static String PROP_NAME = "MB-Occulus-Use-Properties";
 	
 	public ExtendedPlayerProperties() {
@@ -18,11 +19,13 @@ public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
 		compound.setInteger("abilityUses", lastAbilitySaveCount);
+		compound.setBoolean("powersOn", powersOn);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		currentAbilitySaveCount = compound.getInteger("abilityUses");
+		powersOn = compound.getBoolean("powersOn");
 	}
 
 	@Override
@@ -40,6 +43,14 @@ public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 	
 	public void setAbilityUsage(int amt) {
 		lastAbilitySaveCount = amt;
+	}
+	
+	public boolean getPowersEnabled() {
+		return this.powersOn;
+	}
+	
+	public void togglePowers() {
+		this.powersOn = !this.powersOn;
 	}
 
 }

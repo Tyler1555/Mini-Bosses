@@ -10,4 +10,8 @@ public class CommonProxy {
 		return "dark_iron".length();
 	}
 	
+	public void registerKeyBindings() {
+		
+	}
+	
 }

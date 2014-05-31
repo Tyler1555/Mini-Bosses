@@ -5,18 +5,23 @@ import java.awt.Color;
 import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
+import me.tyler15555.minibosses.entity.EntityGlider;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.entity.EntityStealthCreeper;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
 import me.tyler15555.minibosses.entity.EntityWatcher;
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.network.PacketHandler;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
+import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +40,7 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -66,7 +72,10 @@ public class MiniBosses {
 	
 	@EventHandler
 	public void loadMod(FMLInitializationEvent event) {
+		PacketHandler.init();
+		
 		proxy.registerRenderers();
+		proxy.registerKeyBindings();
 		
 		OreDictionary.registerOre("ingotDarkIron", MBItems.ingotDarkIron);
 		
@@ -79,6 +88,7 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityStealthCreeper.class, "MB-StealthCreeper", EntityRegistry.findGlobalUniqueEntityId(), Color.WHITE.getRGB(), Color.GRAY.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityLivingBlock.class, "MB-LivingBlock", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "MB-Watcher", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.WHITE.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntityGlider.class, "MB-Glider", EntityRegistry.findGlobalUniqueEntityId(), Color.BLUE.getRGB(), Color.CYAN.getRGB());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
@@ -88,6 +98,9 @@ public class MiniBosses {
 		
 		if(ConfigHelper.allowSlimeBlockCrafting) {
 			GameRegistry.addRecipe(new ItemStack(MBBlocks.blockSlime, 2), new Object[] {"sss", "sss", "sss", 's', Items.slime_ball});
+		}
+		if(ConfigHelper.enableGiantSpawn) {
+			EntityRegistry.addSpawn(EntityGiantZombie.class, ConfigHelper.giantSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		}
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronChest, new Object[] {"i i", "iii", "iii", 'i', "ingotDarkIron"}));
@@ -113,6 +126,14 @@ public class MiniBosses {
 				Resources.entityBlockList.put(data[0], Integer.valueOf(data[1]));
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onServerStart(FMLServerStartingEvent event) {
+		MinecraftServer server = event.getServer();
+		ServerCommandManager manager = (ServerCommandManager)server.getCommandManager();
+		
+		manager.registerCommand(new CommandMiniBosses());
 	}
 	
 	public static int createDarkIronRenderPrefix() {
