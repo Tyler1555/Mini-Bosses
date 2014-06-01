@@ -19,7 +19,7 @@ import me.tyler15555.minibosses.entity.EntityWatcher;
 
 public class ClientProxy extends CommonProxy {
 
-	protected static final KeyBinding toggleBind = new KeyBinding("key.toggle", Keyboard.KEY_P, "key.catagories.minibosses");
+	protected static final KeyBinding toggleBind = new KeyBinding("key.toggle.powers", Keyboard.KEY_P, "key.catagories.minibosses");
 	
 	@Override
 	public void registerRenderers() {

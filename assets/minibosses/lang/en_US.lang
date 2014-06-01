@@ -12,3 +12,5 @@ item.darkIronBoots.name=Dark Iron Boots
 item.ingotDarkIron.name=Dark Iron Ingot
 item.itemOcculus.name=Occulus
 tile.blockSlime.name=Slime Block
+key.catagories.minibosses=Mini-Bosses' Key Bindings
+key.toggle.powers=Toggle Occulus Powers

@@ -1,5 +1,9 @@
 package me.tyler15555.minibosses.entity;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import me.tyler15555.minibosses.util.WorldGenHelper;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -10,8 +14,12 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -42,8 +50,17 @@ public class EntityGlider extends EntityMob {
 		super.onLivingUpdate();
 		
 		if(this.isInWater()) {
-			this.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 500));
-			this.addPotionEffect(new PotionEffect(Potion.invisibility.id, 500));
+			//this.jump();
+			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.ice);
+		}
+	}
+	
+	@Override
+	public void setDead() {
+		super.setDead();
+		
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			WorldGenHelper.generateWall(worldObj, (int)posX, (int)posY, (int)posZ, Blocks.ice, 8, 8);
 		}
 	}
 }
