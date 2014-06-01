@@ -97,7 +97,7 @@ public class MBEventHandler {
 		if(speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null) {
 			ExtendedPlayerProperties props = (ExtendedPlayerProperties) speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME);
 			
-			if(props.getAbilityUsageAmount() > 0) {
+			if(props.getAbilityUsageAmount() > 0 && props.getPowersEnabled()) {
 				speed.newSpeed = speed.originalSpeed * 2;
 				
 				if(random.nextInt(149) == 1) {
@@ -117,7 +117,7 @@ public class MBEventHandler {
 			if(player.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null) {
 				ExtendedPlayerProperties props = (ExtendedPlayerProperties) player.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME);
 				
-				if(props.getAbilityUsageAmount() > 0 && random.nextInt(4) == 1) {
+				if(props.getAbilityUsageAmount() > 0 && props.getPowersEnabled()) {
 					event.entityLiving.setPosition(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ + 10);
 					EntityLightningBolt lightning = new EntityLightningBolt(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
 					
