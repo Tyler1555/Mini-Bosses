@@ -50,17 +50,8 @@ public class EntityGlider extends EntityMob {
 		super.onLivingUpdate();
 		
 		if(this.isInWater()) {
-			//this.jump();
+			this.jump();
 			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.ice);
-		}
-	}
-	
-	@Override
-	public void setDead() {
-		super.setDead();
-		
-		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-			WorldGenHelper.generateWall(worldObj, (int)posX, (int)posY, (int)posZ, Blocks.ice, 8, 8);
 		}
 	}
 }

@@ -4,6 +4,7 @@ entity.MB-ForestGuard.name=Forest Guard
 entity.MB-Crawler.name=Crawler
 entity.MB-StealthCreeper.name=Stealth Creeper
 entity.MB-Watcher.name=Watcher
+entity.MB-Glider.name=Glider
 itemGroup.MiniBosses=Minibosses - Items & Blocks
 item.darkIronHelm.name=Dark Iron Helmet
 item.darkIronChest.name=Dark Iron Chestplate
