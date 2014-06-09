@@ -22,8 +22,11 @@ import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
@@ -102,28 +105,33 @@ public class MiniBosses {
 		if(ConfigHelper.enableGiantSpawn) {
 			EntityRegistry.addSpawn(EntityGiantZombie.class, ConfigHelper.giantSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		}
+		if(ConfigHelper.addMiniBossesToDungeons) {
+			DungeonHooks.addDungeonMob("MB-IronZombie", 50);
+			DungeonHooks.addDungeonMob("MB-ForestGuard", 50);
+		}
+		if(ConfigHelper.addLootToDungeons) {
+			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(MBItems.ingotDarkIron, 3), 1, 10, 10));
+		}
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronChest, new Object[] {"i i", "iii", "iii", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
+		
+		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 20);
 	}
 	
 	@EventHandler
 	public void finishLoading(FMLPostInitializationEvent event) {
-		
+		Resources.dungeonMobList.add("MB-IronZombie");
 	}
 	
 	@EventHandler
 	public void handleIMC(IMCEvent event) {
 		for(IMCMessage message : event.getMessages()) {
-			if(message.isItemStackMessage()) {
-				MicroBossProperties.modWeapons.add(message.getItemStackValue());
-				System.out.println("[MiniBosses] Mod: " + message.getSender() + " has added an item to the weapon list!");
-			}
-			if(message.isStringMessage() && message.getStringValue().contains("!")) {
-				String[] data = message.getStringValue().split("!");
+			if(message.isStringMessage() && message.getStringValue().contains("Dungeon")) {
+				String[] data = message.getStringValue().split(":");
 				
-				Resources.entityBlockList.put(data[0], Integer.valueOf(data[1]));
+				Resources.dungeonMobList.add(data[1]);
 			}
 		}
 	}

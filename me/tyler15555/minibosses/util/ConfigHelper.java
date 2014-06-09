@@ -20,6 +20,8 @@ public class ConfigHelper {
 	public static int superSlimeSpawnRate;
 	public static int stealthCreeperSpawnRate;
 	public static int giantSpawnRate;
+	public static boolean addMiniBossesToDungeons;
+	public static boolean addLootToDungeons;
 	
 	public static void setupConfig(Configuration config, Logger logger) {
 		try {
@@ -33,6 +35,8 @@ public class ConfigHelper {
 			stealthCreeperSpawnRate = config.get("Spawning", "stealthCreeperSpawnRate", 10).getInt(10);
 			enableGiantSpawn = config.get("Spawning", "enableGiantSpawn", false).getBoolean(false);
 			giantSpawnRate = config.get("Spawning", "giantSpawnRate", 10).getInt(10);
+			addMiniBossesToDungeons = config.get("General", "addMiniBossesToDungeons", true).getBoolean(true);
+			addLootToDungeons = config.get("General", "addLootToDungeons", true).getBoolean(true);
 		} catch(Exception e) {
 			logger.log(Level.ERROR, "A severe error has occured when attempting to load the config file for this mod! Some options may not be the way you set them!");
 		} finally {
