@@ -91,7 +91,7 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityStealthCreeper.class, "MB-StealthCreeper", EntityRegistry.findGlobalUniqueEntityId(), Color.WHITE.getRGB(), Color.GRAY.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityLivingBlock.class, "MB-LivingBlock", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "MB-Watcher", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.WHITE.getRGB());
-		EntityRegistry.registerGlobalEntityID(EntityGlider.class, "MB-Glider", EntityRegistry.findGlobalUniqueEntityId(), Color.BLUE.getRGB(), Color.CYAN.getRGB());
+		//EntityRegistry.registerGlobalEntityID(EntityGlider.class, "MB-Glider", EntityRegistry.findGlobalUniqueEntityId(), Color.BLUE.getRGB(), Color.CYAN.getRGB());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
@@ -117,7 +117,7 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
 		
-		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 20);
+		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
 	
 	@EventHandler
