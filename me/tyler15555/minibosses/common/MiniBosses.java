@@ -122,7 +122,7 @@ public class MiniBosses {
 	
 	@EventHandler
 	public void finishLoading(FMLPostInitializationEvent event) {
-		Resources.dungeonMobList.add("MB-IronZombie");
+		//Resources.dungeonMobList.add("MB-IronZombie");
 	}
 	
 	@EventHandler

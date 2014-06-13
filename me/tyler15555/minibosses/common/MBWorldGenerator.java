@@ -19,6 +19,8 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class MBWorldGenerator implements IWorldGenerator {
 
+	
+	
 	public MBWorldGenerator() {
 		
 	}
@@ -33,22 +35,22 @@ public class MBWorldGenerator implements IWorldGenerator {
 	
 	private void generateSurface(World world, int chunkX, int chunkZ, Random random) {
 		int posX = random.nextInt(16) + chunkX;
-		int posY = random.nextInt(80);
+		int posY = random.nextInt(128);
 		int posZ = random.nextInt(16) + chunkZ;
 		
 		if(world.getBlock(posX, posY, posZ) == Blocks.grass) {
-			WorldGenHelper.generateCorner(world, posX, posY - 5, posZ, Blocks.stonebrick, 7, 7, 7);
+			WorldGenHelper.generateCorner(world, posX, posY - 7, posZ, Blocks.stonebrick, 7, 7, 7);
 			
-			world.setBlock(posX + 2, posY - 5, posZ + 6, Blocks.mob_spawner);
-			world.setBlock(posX + 4, posY - 5, posZ + 6, Blocks.mob_spawner);
-			world.setBlock(posX, posY - 7, posZ, Blocks.chest);
+			world.setBlock(posX + 2, posY - 7, posZ + 6, Blocks.mob_spawner);
+			world.setBlock(posX + 4, posY - 7, posZ + 6, Blocks.mob_spawner);
+			world.setBlock(posX, posY - 9, posZ, Blocks.chest);
 			
 			//world.setLightValue(EnumSkyBlock.Block, posX + 2, posY - 5, posZ + 6, 0);
 			//world.setLightValue(EnumSkyBlock.Block, posX + 4, posY - 5, posZ + 6, 0);
 			
-			TileEntityMobSpawner spawner1 = (TileEntityMobSpawner) world.getTileEntity(posX + 2, posY - 5, posZ + 6);
-			TileEntityMobSpawner spawner2 = (TileEntityMobSpawner) world.getTileEntity(posX + 4, posY - 5, posZ + 6);
-			TileEntityChest chest = (TileEntityChest) world.getTileEntity(posX, posY - 7, posZ);
+			TileEntityMobSpawner spawner1 = (TileEntityMobSpawner) world.getTileEntity(posX + 2, posY - 7, posZ + 6);
+			TileEntityMobSpawner spawner2 = (TileEntityMobSpawner) world.getTileEntity(posX + 4, posY - 7, posZ + 6);
+			TileEntityChest chest = (TileEntityChest) world.getTileEntity(posX, posY - 9, posZ);
 			
 			WeightedRandomChestContent.generateChestContents(random, ChestGenHooks.getItems(ChestGenHooks.DUNGEON_CHEST, random), chest, 6);
 			
