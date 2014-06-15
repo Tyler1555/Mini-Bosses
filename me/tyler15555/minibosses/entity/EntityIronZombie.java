@@ -34,9 +34,6 @@ public class EntityIronZombie extends EntityZombie {
 	protected void entityInit() {
 		super.entityInit();
 		this.getDataWatcher().addObject(15, Integer.valueOf(0));
-		if(this.rand.nextInt(1) == 1){
-			this.setDarkIron();
-		}
 	}
 	
 	@Override
@@ -77,6 +74,9 @@ public class EntityIronZombie extends EntityZombie {
 			if(entity.getHeldItem() != null && this.rand.nextInt(19) == 1 && this.getDistanceToEntity(entity) <= 5.5D && this.getHeldItem() == null) {
 				this.setCurrentItemOrArmor(0, entity.getHeldItem());
 				entity.destroyCurrentEquippedItem();
+			}
+			if(this.rand.nextInt(19) == 1) {
+				this.setDarkIron();
 			}
 		}
 		return true;

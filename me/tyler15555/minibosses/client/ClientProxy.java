@@ -10,6 +10,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import me.tyler15555.minibosses.common.CommonProxy;
 import me.tyler15555.minibosses.entity.EntityCrawler;
+import me.tyler15555.minibosses.entity.EntityFeeder;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
 import me.tyler15555.minibosses.entity.EntityGlider;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
@@ -31,6 +32,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityLivingBlock.class, new RenderLivingBlock());
 		RenderingRegistry.registerEntityRenderingHandler(EntityWatcher.class, new RenderWatcher());
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlider.class, new RenderGlider());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFeeder.class, new RenderFeeder());
 		System.out.println("[Minibosses] Successfully registered all entity renderers!");
 	}
 	
