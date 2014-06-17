@@ -47,10 +47,6 @@ public class EntityIronZombie extends EntityZombie {
 			this.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 2000));
 			this.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2000));
 		}
-		double velX = this.posX + this.rand.nextDouble();
-		double velY = this.posY + this.rand.nextDouble();
-		double velZ = this.posZ + this.rand.nextDouble();
-		
 		if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && this.isDarkIron()) {
 			this.worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0, 0, 0);
 		}

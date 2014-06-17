@@ -1,7 +1,10 @@
 package me.tyler15555.minibosses.entity;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -13,12 +16,18 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityFeeder extends EntityMob {
+public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 
 	public int imitatingEntityID;
+	
+	public EntityAIArrowAttack arrowAI = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	
 	public EntityFeeder(World par1World) {
 		super(par1World);
@@ -100,9 +109,43 @@ public class EntityFeeder extends EntityMob {
 		}
 		if(this.getImitatingEntityID() == 2) {
 			this.worldObj.spawnParticle("portal", this.posX, this.posY, this.posZ, 0, 0, 0);
+			
+			if(!this.tasks.taskEntries.contains(arrowAI)) {
+				this.tasks.addTask(2, arrowAI);
+			}
 		}
 		if(this.getImitatingEntityID() == 3) {
 			this.worldObj.spawnParticle("explosion", this.posX, this.posY, this.posZ, 0, 0, 0);
 		}
+		if(!(this.getImitatingEntityID() == 2) && this.tasks.taskEntries.contains(arrowAI)) {
+			this.tasks.removeTask(arrowAI);
+		}
+	}
+
+	//Just the skeletons arrow code without the enchantments
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase entity, float var2) {
+		EntityArrow entityarrow = new EntityArrow(this.worldObj, this, entity, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+		entityarrow.setDamage((double)(var2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
+		this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.worldObj.spawnEntityInWorld(entityarrow);
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float damage) {
+		super.attackEntityFrom(source, damage);
+		
+		if(this.getImitatingEntityID() == 1 && this.rand.nextInt(19) == 1) {
+			if(source.getEntity() != null && source.getEntity() instanceof EntityLiving) {
+				EntityLiving entity = (EntityLiving)source.getEntity();
+				
+				entity.addPotionEffect(new PotionEffect(Potion.poison.id, 500));
+			}
+		}
+		if(this.getImitatingEntityID() == 3 && source.getEntity() != null && this.rand.nextInt(29) == 1) {
+			this.worldObj.createExplosion(source.getEntity(), source.getEntity().posX, source.getEntity().posY, source.getEntity().posZ, 3.5F, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+		}
+		
+		return true;
 	}
 }
