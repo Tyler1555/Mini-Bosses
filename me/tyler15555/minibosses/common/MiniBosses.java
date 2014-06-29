@@ -48,7 +48,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.2 PRE")
+@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.1.2")
 public class MiniBosses {
 
 	@Instance("MiniBosses")
@@ -93,7 +93,7 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityLivingBlock.class, "MB-LivingBlock", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "MB-Watcher", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.WHITE.getRGB());
 		//EntityRegistry.registerGlobalEntityID(EntityGlider.class, "MB-Glider", EntityRegistry.findGlobalUniqueEntityId(), Color.BLUE.getRGB(), Color.CYAN.getRGB());
-		EntityRegistry.registerGlobalEntityID(EntityFeeder.class, "MB-Feeder", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.WHITE.getRGB());
+		//EntityRegistry.registerGlobalEntityID(EntityFeeder.class, "MB-Feeder", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.WHITE.getRGB());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
@@ -119,7 +119,7 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
 		
-		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
+		//GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
 	
 	@EventHandler
@@ -129,13 +129,7 @@ public class MiniBosses {
 	
 	@EventHandler
 	public void handleIMC(IMCEvent event) {
-		for(IMCMessage message : event.getMessages()) {
-			if(message.isStringMessage() && message.getStringValue().contains("Dungeon")) {
-				String[] data = message.getStringValue().split(":");
-				
-				Resources.dungeonMobList.add(data[1]);
-			}
-		}
+		
 	}
 	
 	@EventHandler

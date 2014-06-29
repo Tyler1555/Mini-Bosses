@@ -15,12 +15,8 @@ public class Resources {
 	}
 	public static ArmorMaterial dark_iron;
 	
-	//Stores mod's request to not allow an entity to spawn in a certain dimension. Messages should be formatted as EntityName|DimensionID
+	//Stores mod's request to not allow an entity to spawn in a certain dimension. Messages should be formatted as EntityName:DimensionID
 	public static HashMap<String, Integer> entityBlockList = new HashMap();
-	
-	//Used to store the IDs of mod entities that would like to be in this mod's dungeons dungeons
-	public static ArrayList<String> dungeonMobList = new ArrayList();
-	
 	
 	public static String[] firstNames = new String[] {"Based Doge", "Occulus", "Lord", "Destroyer", "Darkness", "Queen", "Steve", "Tom", "LaKeesha", "Doge", "tyler15555", "2withyoda"};
 	public static String[] lastNames = new String[] {"Venice", "Worlds", "The World", "Earth", "The Galaxy", "Your Mom", "The Woods", "Mountains", "Rivers"};

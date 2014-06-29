@@ -50,7 +50,7 @@ public class MBEventHandler {
 				skeleton.setSkeletonType(0);
 				skeleton.copyLocationAndAnglesFrom(horse);
 				event.world.spawnEntityInWorld(skeleton);
-				horse.setOwnerName(skeleton.getCommandSenderName());
+				horse.func_152120_b(skeleton.getCommandSenderName()); //Sets the owner of the horse
 				horse.setHorseTamed(true);
 				skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 				skeleton.mountEntity(horse);
