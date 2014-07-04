@@ -20,6 +20,7 @@ public class ConfigHelper {
 	public static int superSlimeSpawnRate;
 	public static int stealthCreeperSpawnRate;
 	public static int giantSpawnRate;
+	public static int feederSpawnRate;
 	public static boolean addMiniBossesToDungeons;
 	public static boolean addLootToDungeons;
 	
@@ -35,6 +36,7 @@ public class ConfigHelper {
 			stealthCreeperSpawnRate = config.get("Spawning", "stealthCreeperSpawnRate", 10).getInt(10);
 			enableGiantSpawn = config.get("Spawning", "enableGiantSpawn", false).getBoolean(false);
 			giantSpawnRate = config.get("Spawning", "giantSpawnRate", 10).getInt(10);
+			feederSpawnRate = config.get("Spawning", "feederSpawnRate", 10).getInt(10);
 			addMiniBossesToDungeons = config.get("General", "addMiniBossesToDungeons", true).getBoolean(true);
 			addLootToDungeons = config.get("General", "addLootToDungeons", true).getBoolean(true);
 		} catch(Exception e) {

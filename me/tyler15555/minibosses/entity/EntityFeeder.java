@@ -1,14 +1,11 @@
 package me.tyler15555.minibosses.entity;
 
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -29,7 +26,9 @@ import net.minecraft.world.World;
 
 public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 
-	public int imitatingEntityID;
+	//TODO: Fix targeting errors, all features involving other mobs are temp disabled
+	
+	//public int imitatingEntityID;
 	
 	public EntityAIArrowAttack arrowAI = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	
@@ -37,16 +36,16 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 		super(par1World);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityZombie.class, 1.0D, false));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntitySkeleton.class, 1.0D, false));
-		this.tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityCreeper.class, 1.0D, false));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityZombie.class, 1.0D, false));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntitySkeleton.class, 1.0D, false));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityCreeper.class, 1.0D, false));
 		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 0, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, 0, true));
+		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 0, true));
 	}
 	
 	/* DATA VALUE TABLE:
@@ -58,7 +57,7 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 	@Override
 	public void entityInit() {
 		super.entityInit();
-		this.getDataWatcher().addObject(12, Integer.valueOf(0));
+		//this.getDataWatcher().addObject(12, Integer.valueOf(0));
 	}
 	
 	@Override
@@ -68,7 +67,7 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 		this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).setBaseValue(150D);
 		this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.movementSpeed).setBaseValue(.625D);
 	}
-	
+	/*
 	@Override
 	public void onKillEntity(EntityLivingBase entity) {
 		super.onKillEntity(entity);
@@ -86,8 +85,8 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 			this.heal(2.0F);
 		}
 		
-	}
-
+	} */
+    /*
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
@@ -127,7 +126,7 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 		if(!(this.getImitatingEntityID() == 2) && this.tasks.taskEntries.contains(arrowAI)) {
 			this.tasks.removeTask(arrowAI);
 		}
-	}
+	} */
 
 	//Just the skeletons arrow code without the enchantments
 	@Override
@@ -141,7 +140,7 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		super.attackEntityFrom(source, damage);
-		
+		/*
 		if(this.getImitatingEntityID() == 1 && this.rand.nextInt(19) == 1) {
 			if(source.getEntity() != null && source.getEntity() instanceof EntityLiving) {
 				EntityLiving entity = (EntityLiving)source.getEntity();
@@ -151,6 +150,13 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 		}
 		if(this.getImitatingEntityID() == 3 && source.getEntity() != null && this.rand.nextInt(29) == 1) {
 			this.worldObj.createExplosion(source.getEntity(), source.getEntity().posX, source.getEntity().posY, source.getEntity().posZ, 3.5F, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+		} */
+		
+		if(source.getEntity() != null && source.getEntity() instanceof EntityPlayer && this.rand.nextInt(19) == 1) {
+			EntityPlayer player = (EntityPlayer)source.getEntity();
+			
+			player.destroyCurrentEquippedItem();
+			this.heal(4);
 		}
 		
 		return true;
