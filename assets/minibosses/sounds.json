@@ -19,5 +19,26 @@
 			"name": "crawlerdeath",
 			"stream": "false"
 		}]
+	},
+	"feederliving": {
+	    "catagory": "master",
+		"sounds": [{
+		    "name": "feederliving",
+			"stream": "false"
+		}]
+	},
+	"feederhurt": {
+	    "catagory": "master",
+		"sounds": [{
+		    "name": "feederhurt",
+			"stream": "false"
+		}]
+	},
+	"feederdeath": {
+	    "catagory": "master",
+		"sounds": [{
+		    "name": "feederdeath",
+			"stream": "false"
+		}]
 	}
 }

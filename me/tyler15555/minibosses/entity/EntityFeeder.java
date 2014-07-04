@@ -161,4 +161,19 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 		
 		return true;
 	}
+	
+	@Override
+	public String getLivingSound() {
+		return "minibosses:feederliving";
+	}
+	
+	@Override
+	public String getHurtSound() {
+		return "minibosses:feederhurt";
+	}
+	
+	@Override
+	public String getDeathSound() {
+		return "minibosses:feederdeath";
+	}
 }
