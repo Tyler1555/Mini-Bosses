@@ -27,7 +27,7 @@ public class CommandMiniBosses extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return "Add no arguments to check the version, or use the argument checkpoints to check your occulus points";
+		return "Checks the version of this mod";
 	}
 
 	@Override
