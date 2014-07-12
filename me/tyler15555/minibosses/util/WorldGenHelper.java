@@ -32,21 +32,4 @@ public class WorldGenHelper {
 			}
 		}
 	}
-	
-	public static void generateCorner(World world, int x, int y, int z, Block block, int height, int width, int volume) {
-		for(int i = 0; i < width; i++) {
-			for(int j = 0; j < height; j++) {
-				for(int k = 0; k < volume; k++) {
-					world.setBlock(x + i + 1, y + j + 1, z + k + 1, block);
-				}
-			}
-		}
-		for(int i = 0; i < width; i++) {
-			for(int j = 0; j < height; j++) {
-				for(int k = 0; k < volume; k++) {
-					world.setBlockToAir(x + i, y + j, z + k);
-				}
-			}
-		}
-	}
 }

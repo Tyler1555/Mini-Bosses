@@ -2,6 +2,7 @@ package me.tyler15555.minibosses.common;
 
 import java.util.Random;
 
+import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.util.Resources;
 import me.tyler15555.minibosses.util.WorldGenHelper;
 import net.minecraft.init.Blocks;
@@ -34,7 +35,15 @@ public class MBWorldGenerator implements IWorldGenerator {
 	}
 	
 	private void generateSurface(World world, int chunkX, int chunkZ, Random random) {
+		int posX = chunkX + random.nextInt(16);
+		int posY = random.nextInt(128);
+		int posZ = random.nextInt(16) + chunkZ;
 		
+		if(world.getBlock(posX, posY, posZ) == Blocks.stone) {
+			WorldGenHelper.generateSolidCube(world, posX, posY, posZ, MBBlocks.cryptStone, 8, 8, 8);
+			world.setBlock(posX + 4, posY + 4, posZ + 4, Blocks.chest);
+			System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ);
+		}
 	}
 
 }

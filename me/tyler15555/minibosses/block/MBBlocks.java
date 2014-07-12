@@ -9,5 +9,6 @@ public class MBBlocks {
 	}
 	
 	public static Block blockSlime = new BlockSlime();
+	public static Block cryptStone = new BlockCryptStone();
 
 }

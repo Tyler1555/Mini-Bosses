@@ -1,7 +1,10 @@
 package me.tyler15555.minibosses.entity;
 
+import java.util.Random;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.util.WorldGenHelper;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityFlying;
@@ -23,7 +26,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
+//More or less, this mob is a debug entity now
 public class EntityGlider extends EntityMob {
 
 	public EntityGlider(World par1World) {
@@ -47,12 +50,18 @@ public class EntityGlider extends EntityMob {
 	
 	
 	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
+	public void setDead() {
+		Random random = new Random();
 		
-		if(this.isInWater()) {
-			this.jump();
-			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.ice);
-		}
+		super.setDead();
+		int x = (int) this.posX;
+		int y = (int) this.posY;
+		int z = (int) this.posZ;
+		
+		//if(worldObj.getBlock(x, y, z) == Blocks.stone) {
+			WorldGenHelper.generateSolidCube(worldObj, x, y, z, MBBlocks.cryptStone, 8, 8, 8);
+			worldObj.setBlock(x + 4, y + 4, z + 4, Blocks.chest);
+			//System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ);
+		//}
 	}
 }

@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.block;
 
+import me.tyler15555.minibosses.entity.EntityTombGuard;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +30,12 @@ public class BlockCryptStone extends Block {
 	@Override
 	public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
 		if(world.getTileEntity(tileX, tileY, tileZ) instanceof TileEntityChest) {
-			//Coming soon ;)
+			for(int i = 0; i < 3; i++) {
+				EntityTombGuard guard = new EntityTombGuard((World) world);
+				guard.setPosition(x, y, z);
+				World _world = (World)world;
+				_world.spawnEntityInWorld(guard);
+			}
 		}
 	}
 	
