@@ -123,7 +123,7 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
 		
-		//GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
+		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
 	
 	@EventHandler

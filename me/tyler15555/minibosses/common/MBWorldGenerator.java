@@ -6,6 +6,8 @@ import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.util.Resources;
 import me.tyler15555.minibosses.util.WorldGenHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
@@ -42,7 +44,17 @@ public class MBWorldGenerator implements IWorldGenerator {
 		if(world.getBlock(posX, posY, posZ) == Blocks.stone) {
 			WorldGenHelper.generateSolidCube(world, posX, posY, posZ, MBBlocks.cryptStone, 8, 8, 8);
 			world.setBlock(posX + 4, posY + 4, posZ + 4, Blocks.chest);
-			System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ);
+			
+			TileEntityChest chest = (TileEntityChest) world.getTileEntity(posX + 4, posY + 4, posZ + 4);
+			
+			if(chest != null) { //So we don't crash the game if another structure overwrites the chest
+				Item[] possibleLoot = new Item[] {Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.emerald, Items.bone, Items.coal, Items.rotten_flesh, Items.carrot, Items.golden_apple};
+				
+				for(int i = 0; i < MathHelper.getRandomIntegerInRange(random, 1, 9); i++) {
+					chest.setInventorySlotContents(i, new ItemStack(possibleLoot[random.nextInt(possibleLoot.length)], MathHelper.getRandomIntegerInRange(random, 1, 5)));
+				}
+			}
+			//System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ); Used for finding naturally generating structures. Uncomment this line if you want to be a dirty cheater. You dirty cheater.
 		}
 	}
 

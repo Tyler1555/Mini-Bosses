@@ -19,6 +19,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -54,14 +55,24 @@ public class EntityGlider extends EntityMob {
 		Random random = new Random();
 		
 		super.setDead();
-		int x = (int) this.posX;
-		int y = (int) this.posY;
-		int z = (int) this.posZ;
+		int X = (int) this.posX;
+		int Y = (int) this.posY;
+		int Z = (int) this.posZ;
 		
-		//if(worldObj.getBlock(x, y, z) == Blocks.stone) {
-			WorldGenHelper.generateSolidCube(worldObj, x, y, z, MBBlocks.cryptStone, 8, 8, 8);
-			worldObj.setBlock(x + 4, y + 4, z + 4, Blocks.chest);
+		//if(world.getBlock(posX, posY, posZ) == Blocks.stone) {
+			WorldGenHelper.generateSolidCube(worldObj, X, Y, Z, MBBlocks.cryptStone, 8, 8, 8);
+			worldObj.setBlock(X + 4, Y + 4, Z + 4, Blocks.chest);
+			
+			TileEntityChest chest = (TileEntityChest) worldObj.getTileEntity(X + 4, Y + 4, Z + 4);
+			
+			if(chest != null) { //So we don't crash the game if another structure overwrites the chest
+				Item[] sibleLoot = new Item[] {Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.emerald, Items.bone, Items.coal, Items.rotten_flesh, Items.carrot, Items.golden_apple};
+				
+				for(int i = 0; i < MathHelper.getRandomIntegerInRange(random, 1, 9); i++) {
+					chest.setInventorySlotContents(i, new ItemStack(sibleLoot[random.nextInt(sibleLoot.length)], MathHelper.getRandomIntegerInRange(random, 1, 5)));
+				}
+			//}
 			//System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ);
-		//}
+		}
 	}
 }
