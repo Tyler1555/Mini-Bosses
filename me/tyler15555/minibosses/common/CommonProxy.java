@@ -11,7 +11,7 @@ public class CommonProxy {
 	}
 	
 	public void registerKeyBindings() {
-		
+		System.out.println("[MiniBosses] Detected server side, skipping key binding registration");
 	}
 	
 }

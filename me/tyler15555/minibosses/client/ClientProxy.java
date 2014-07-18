@@ -13,6 +13,7 @@ import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityFeeder;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
 import me.tyler15555.minibosses.entity.EntityGlider;
+import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
@@ -35,6 +36,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlider.class, new RenderGlider());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFeeder.class, new RenderFeeder());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTombGuard.class, new RenderTombGuard());
+		RenderingRegistry.registerEntityRenderingHandler(EntityInfernoGolem.class, new RenderInfernoGolem());
 		System.out.println("[Minibosses] Successfully registered all entity renderers!");
 	}
 	

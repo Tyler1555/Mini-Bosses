@@ -7,6 +7,7 @@ import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityFeeder;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
 import me.tyler15555.minibosses.entity.EntityGlider;
+import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.entity.EntityStealthCreeper;
@@ -84,6 +85,7 @@ public class MiniBosses {
 		proxy.registerKeyBindings();
 		
 		OreDictionary.registerOre("ingotDarkIron", MBItems.ingotDarkIron);
+		OreDictionary.registerOre("ingotInferno", MBItems.ingotInferno);
 		
 		MinecraftForge.EVENT_BUS.register(new MBEventHandler());
 		
@@ -97,6 +99,7 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityFeeder.class, "MB-Feeder", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.WHITE.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityGlider.class, "DEBUG_ENTITY", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.BLACK.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityTombGuard.class, "MB-TombGuard", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntityInfernoGolem.class, "MB-InfernoGolem", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.LIGHT_GRAY.getRGB());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
@@ -104,6 +107,7 @@ public class MiniBosses {
 		EntityRegistry.addSpawn(EntityCrawler.class, ConfigHelper.crawlerSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntityStealthCreeper.class, ConfigHelper.stealthCreeperSpawnRate, 1, 1, EnumCreatureType.creature, BiomeDictionary.getBiomesForType(Type.JUNGLE));
 		EntityRegistry.addSpawn(EntityFeeder.class, 0, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.JUNGLE));
+		EntityRegistry.addSpawn(EntityInfernoGolem.class, ConfigHelper.infernoGolemSpawnRate, 1, 4, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.NETHER));
 		
 		if(ConfigHelper.allowSlimeBlockCrafting) {
 			GameRegistry.addRecipe(new ItemStack(MBBlocks.blockSlime, 2), new Object[] {"sss", "sss", "sss", 's', Items.slime_ball});
