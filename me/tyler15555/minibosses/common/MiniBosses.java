@@ -72,6 +72,10 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.darkIronLegs, "darkIronLegs");
 		GameRegistry.registerItem(MBItems.darkIronBoots, "darkIronBoots");
 		GameRegistry.registerItem(MBItems.occulus_item, "itemOcculus");
+		GameRegistry.registerItem(MBItems.infernoHelm, "infernoHelm");
+		GameRegistry.registerItem(MBItems.infernoChest, "infernoChest");
+		GameRegistry.registerItem(MBItems.infernoLegs, "infernoLegs");
+		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");
@@ -126,6 +130,10 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronChest, new Object[] {"i i", "iii", "iii", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotInferno"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoChest, new Object[] {"i i", "iii", "iii", 'i', "ingotInferno"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotInferno"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"}));
 		
 		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
@@ -150,6 +158,10 @@ public class MiniBosses {
 	
 	public static int createDarkIronRenderPrefix() {
 		return proxy.registerDarkArmorRenderPrefix();
+	}
+	
+	public static int createInfernoRenderPrefix() {
+		return proxy.registerInfernoArmorRenderPrefix();
 	}
 	
 }

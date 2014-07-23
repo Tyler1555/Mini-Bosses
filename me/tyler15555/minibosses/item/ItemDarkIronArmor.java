@@ -32,7 +32,7 @@ public class ItemDarkIronArmor extends ItemArmor implements ISpecialArmor {
 		if(source.getEntity() != null && source.getEntity() instanceof EntityLiving) {
 			EntityLiving entity = (EntityLiving)source.getEntity();
 			if(entity.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
-				return new ArmorProperties(1, 1, MathHelper.floor_double(damage / 2));
+				return new ArmorProperties(1, Integer.MAX_VALUE, MathHelper.floor_double(damage / 2)); //No, having Integer.Max_VALUE does not mean this will absorb all the damage, its there to prevent an overflow in case you somehow take some ungodly amount of damage
 			}
 		}
 		return new ArmorProperties(0, 0, 0);

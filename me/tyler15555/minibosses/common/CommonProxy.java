@@ -14,4 +14,8 @@ public class CommonProxy {
 		System.out.println("[MiniBosses] Detected server side, skipping key binding registration");
 	}
 	
+	public int registerInfernoArmorRenderPrefix() {
+		return "inferno".length();
+	}
+	
 }

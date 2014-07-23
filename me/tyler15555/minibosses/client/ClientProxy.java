@@ -51,4 +51,9 @@ public class ClientProxy extends CommonProxy {
 		FMLCommonHandler.instance().bus().register(new KeyInputHandler());
 	}
 	
+	@Override
+	public int registerInfernoArmorRenderPrefix() {
+		return RenderingRegistry.addNewArmourRendererPrefix("inferno");
+	}
+	
 }
