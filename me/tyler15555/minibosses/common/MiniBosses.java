@@ -1,6 +1,7 @@
 package me.tyler15555.minibosses.common;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
@@ -57,6 +58,8 @@ public class MiniBosses {
 	public static MiniBosses instance;
 	@SidedProxy(clientSide = "me.tyler15555.minibosses.client.ClientProxy", serverSide = "me.tyler15555.minibosses.common.CommonProxy")
 	public static CommonProxy proxy;
+	
+	public static HashMap<String, Integer> entityBanMap = new HashMap();
 	
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) {
@@ -145,7 +148,13 @@ public class MiniBosses {
 	
 	@EventHandler
 	public void handleIMC(IMCEvent event) {
-		
+		for(IMCMessage message : event.getMessages()) {
+			if(message.isStringMessage() && message.getStringValue().contains(":")) {
+				String[] data = message.getStringValue().split(":");
+				
+				entityBanMap.put(data[0], Integer.valueOf(data[1]));
+			}
+		}
 	}
 	
 	@EventHandler
