@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLiving;
@@ -25,12 +26,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-public class EntityForestGuard extends EntityMob implements IShearable {
+public class EntityForestGuard extends EntityMob implements IShearable, IMiniboss {
 	
 	public EntityForestGuard(World par1World) {
 		super(par1World);
@@ -53,9 +55,9 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(7.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(135D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.34575D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4175D);
 	}
 	
 	@Override
@@ -88,6 +90,17 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 		super.attackEntityFrom(source, damage);
 		if(source instanceof EntityDamageSource) {
 			this.getDataWatcher().updateObject(13, Integer.valueOf(1));
+		}
+		if(this.rand.nextInt(9) == 1 && source.getEntity() != null) {
+			this.setPosition(source.getEntity().posX, source.getEntity().posY, source.getEntity().posZ - 2);
+		}
+		if(this.rand.nextInt(19) == 1) {
+			for(int i = 0; i < MathHelper.getRandomIntegerInRange(rand, 3, 5); i++) {
+				EntitySprout sprout = new EntitySprout(this.worldObj);
+				
+				sprout.setPosition(this.posX, this.posY, this.posZ);
+				this.worldObj.spawnEntityInWorld(sprout);
+			}
 		}
 		return true;
 	}
@@ -152,5 +165,10 @@ public class EntityForestGuard extends EntityMob implements IShearable {
 	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "ForestGuard";
 	}
 }

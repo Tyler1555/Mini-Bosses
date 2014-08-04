@@ -11,6 +11,7 @@ import me.tyler15555.minibosses.entity.EntityGlider;
 import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
+import me.tyler15555.minibosses.entity.EntitySprout;
 import me.tyler15555.minibosses.entity.EntityStealthCreeper;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
 import me.tyler15555.minibosses.entity.EntityTombGuard;
@@ -107,6 +108,7 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityGlider.class, "DEBUG_ENTITY", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.BLACK.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityTombGuard.class, "MB-TombGuard", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityInfernoGolem.class, "MB-InfernoGolem", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.LIGHT_GRAY.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntitySprout.class, "MB-Sprout", EntityRegistry.findGlobalUniqueEntityId());
 		
 		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
