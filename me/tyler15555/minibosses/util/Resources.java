@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import me.tyler15555.minibosses.client.MBCreativeTab;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -14,12 +15,13 @@ public class Resources {
 		
 	}
 	public static ArmorMaterial dark_iron;
+	public static ToolMaterial feeder = EnumHelper.addToolMaterial("FEEDER", 3, 500, 2.5F, 3.5F, 20);
 	
 	//Stores mod's request to not allow an entity to spawn in a certain dimension. Messages should be formatted as EntityName:DimensionID
 	public static HashMap<String, Integer> entityBlockList = new HashMap();
 	
-	public static String[] firstNames = new String[] {"Based Doge", "Occulus", "Lord", "Destroyer", "Darkness", "Queen", "Steve", "Tom", "LaKeesha", "Doge", "tyler15555", "2withyoda"};
-	public static String[] lastNames = new String[] {"Venice", "Worlds", "The World", "Earth", "The Galaxy", "Your Mom", "The Woods", "Mountains", "Rivers"};
+	public static String[] firstNames = new String[] {"Based Doge", "Occulus", "Lord", "Destroyer", "Darkness", "Queen", "Steve", "Tom", "LaKeesha", "Doge", "tyler15555", "2withyoda", "Larry", "Larone"};
+	public static String[] lastNames = new String[] {"Venice", "Worlds", "The World", "Earth", "The Galaxy", "Your Mom", "The Woods", "Mountains", "Rivers", "Stankins"};
 	
 	public static String generateRandomName(Random random) {
 		String ret = firstNames[random.nextInt(firstNames.length)] + " of " + lastNames[random.nextInt(lastNames.length)];

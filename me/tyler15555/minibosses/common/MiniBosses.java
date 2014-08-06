@@ -80,6 +80,8 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.infernoChest, "infernoChest");
 		GameRegistry.registerItem(MBItems.infernoLegs, "infernoLegs");
 		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots");
+		GameRegistry.registerItem(MBItems.feederTooth, "feederTooth");
+		GameRegistry.registerItem(MBItems.feederSword, "feederSword");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");

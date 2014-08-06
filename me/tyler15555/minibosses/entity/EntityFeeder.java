@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.item.MBItems;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -18,6 +19,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -176,4 +178,10 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 	public String getDeathSound() {
 		return "minibosses:feederdeath";
 	}
+	
+	@Override
+	public Item getDropItem() {
+		return MBItems.feederTooth;
+	}
+	
 }
