@@ -1,6 +1,7 @@
 package me.tyler15555.minibosses.entity;
 
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -9,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntityInfernoGolem extends EntityIronGolem {
+public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
 
 	public EntityInfernoGolem(World p_i1694_1_) {
 		super(p_i1694_1_);
@@ -28,6 +29,11 @@ public class EntityInfernoGolem extends EntityIronGolem {
 		if(this.rand.nextInt(19) == 1) {
 			entity.setFire(8);
 		}
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "InfernoGolem";
 	}
 
 }

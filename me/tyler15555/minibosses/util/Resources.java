@@ -15,7 +15,7 @@ public class Resources {
 		
 	}
 	public static ArmorMaterial dark_iron;
-	public static ToolMaterial feeder = EnumHelper.addToolMaterial("FEEDER", 3, 500, 2.5F, 3.5F, 20);
+	public static ToolMaterial feeder;
 	
 	//Stores mod's request to not allow an entity to spawn in a certain dimension. Messages should be formatted as EntityName:DimensionID
 	public static HashMap<String, Integer> entityBlockList = new HashMap();
@@ -30,6 +30,7 @@ public class Resources {
 	
 	public static void setupArmorMaterials() {
 	  dark_iron = EnumHelper.addArmorMaterial("DARKIRON", 22, new int[] {3, 7, 5, 4}, 25);
+	  feeder = EnumHelper.addToolMaterial("FEEDER", 3, 500, 2.5F, 3.5F, 20);
 	}
     
 	public static MBCreativeTab tabMB = new MBCreativeTab();

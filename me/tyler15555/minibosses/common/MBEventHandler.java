@@ -6,6 +6,7 @@ import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
+import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.EntityLiving;
@@ -59,6 +60,12 @@ public class MBEventHandler {
 				EntityCreeper creeper = (EntityCreeper)event.entity;
 				
 				creeper.getDataWatcher().updateObject(17, Byte.valueOf((byte)1));
+			}
+			if(event.entity instanceof IMiniboss) {
+				IMiniboss entity = (IMiniboss)event.entity;
+				if(Resources.entityBlockList.containsKey(entity.getBanlistName()) && Resources.entityBlockList.get(entity.getBanlistName()) == event.entity.worldObj.provider.dimensionId) {
+					event.entity.setDead();
+				}
 			}
 		}
 	}
@@ -123,6 +130,8 @@ public class MBEventHandler {
 					
 					player.worldObj.spawnEntityInWorld(lightning);
 					props.decreaseAbilityUsage();
+					
+					System.out.println("USAGE REMAINING: " + props.getAbilityUsageAmount());
 				}
 			}
 		}

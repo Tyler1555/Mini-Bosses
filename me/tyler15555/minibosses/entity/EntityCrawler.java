@@ -2,6 +2,7 @@ package me.tyler15555.minibosses.entity;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -23,7 +24,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityCrawler extends EntityMob {
+public class EntityCrawler extends EntityMob implements IMiniboss {
 
 	public EntityCrawler(World par1World) {
 		super(par1World);
@@ -121,5 +122,10 @@ public class EntityCrawler extends EntityMob {
 			return super.getCanSpawnHere();
 		}
 	} */
+
+	@Override
+	public String getBanlistName() {
+		return "Crawler";
+	}
 
 }

@@ -1,6 +1,7 @@
 package me.tyler15555.minibosses.entity;
 
 import me.tyler15555.minibosses.block.MBBlocks;
+import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySlime;
@@ -10,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntitySuperSlime extends EntitySlime {
+public class EntitySuperSlime extends EntitySlime implements IMiniboss {
 
 	public EntitySuperSlime(World par1World) {
 		super(par1World);
@@ -80,6 +81,11 @@ public class EntitySuperSlime extends EntitySlime {
 	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "SuperSlime";
 	}
 
 }

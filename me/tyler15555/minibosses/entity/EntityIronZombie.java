@@ -4,6 +4,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityZombie;
@@ -16,7 +17,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityIronZombie extends EntityZombie {
+public class EntityIronZombie extends EntityZombie implements IMiniboss {
 
 	public EntityIronZombie(World par1World) {
 		super(par1World);
@@ -126,6 +127,11 @@ public class EntityIronZombie extends EntityZombie {
 		if(this.getHeldItem() != null) {
 			this.dropItem(this.getHeldItem().getItem(), 1);
 		}
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "IronZombie";
 	}
 
 }

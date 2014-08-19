@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -9,7 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class EntityStealthCreeper extends EntityCreeper {
+public class EntityStealthCreeper extends EntityCreeper implements IMiniboss {
 
 	public EntityStealthCreeper(World par1World) {
 		super(par1World);
@@ -48,6 +49,11 @@ public class EntityStealthCreeper extends EntityCreeper {
 	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "StealthCreeper";
 	}
 
 }

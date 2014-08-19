@@ -1,6 +1,7 @@
 package me.tyler15555.minibosses.entity;
 
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -26,7 +27,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityFeeder extends EntityMob implements IRangedAttackMob {
+public class EntityFeeder extends EntityMob implements IRangedAttackMob, IMiniboss {
 
 	//TODO: Fix targeting errors, all features involving other mobs are temp disabled
 	
@@ -182,6 +183,11 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob {
 	@Override
 	public Item getDropItem() {
 		return MBItems.feederTooth;
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "Feeder";
 	}
 	
 }

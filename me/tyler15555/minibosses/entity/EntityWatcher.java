@@ -1,6 +1,7 @@
 package me.tyler15555.minibosses.entity;
 
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -16,7 +17,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class EntityWatcher extends EntityMob {
+public class EntityWatcher extends EntityMob implements IMiniboss {
 
 	public EntityWatcher(World par1World) {
 		super(par1World);
@@ -56,6 +57,11 @@ public class EntityWatcher extends EntityMob {
 	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "Watcher";
 	}
 
 }

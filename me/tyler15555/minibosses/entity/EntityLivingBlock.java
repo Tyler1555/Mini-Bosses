@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,7 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityLivingBlock extends EntityMob {
+public class EntityLivingBlock extends EntityMob implements IMiniboss {
 	
 	public EntityLivingBlock(World par1World) {
 		super(par1World);
@@ -73,6 +74,11 @@ public class EntityLivingBlock extends EntityMob {
 	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+
+	@Override
+	public String getBanlistName() {
+		return "LivingBlock";
 	}
 
 }

@@ -43,7 +43,8 @@ public class ItemInfernoArmor extends ItemArmor implements ISpecialArmor {
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return !(stack.getItem() == MBItems.infernoLegs) ? "minibosses:/textures/items/armor/inferno_1.png" : "minibosses:/textures/items/armor/inferno_2.png"; 
+		//return !(stack.getItem() == MBItems.infernoLegs) ? "minibosses:/textures/items/armor/inferno_1.png" : "minibosses:/textures/items/armor/inferno_2.png"; 
+		return null;
 	}
 	
 	@Override

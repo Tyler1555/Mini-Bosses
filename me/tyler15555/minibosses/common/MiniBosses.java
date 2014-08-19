@@ -38,6 +38,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.Logger;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -54,6 +55,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.1.2")
 public class MiniBosses {
+	
+	public static org.apache.logging.log4j.Logger logger;
 
 	@Instance("MiniBosses")
 	public static MiniBosses instance;
@@ -65,10 +68,13 @@ public class MiniBosses {
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) {
 		event.getModLog().log(Level.INFO, "Mini-Bosses is starting to load!");
+		logger = event.getModLog();
 		
 		ConfigHelper.setupConfig(new Configuration(event.getSuggestedConfigurationFile()), event.getModLog());
 		
 		Resources.setupArmorMaterials();
+		
+		logger.log(Level.INFO, "NO CRASH YET");
 		
 		GameRegistry.registerItem(MBItems.ingotDarkIron, "ingotDarkIron");
 		GameRegistry.registerItem(MBItems.darkIronHelm, "darkIronHelm");
@@ -76,12 +82,12 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.darkIronLegs, "darkIronLegs");
 		GameRegistry.registerItem(MBItems.darkIronBoots, "darkIronBoots");
 		GameRegistry.registerItem(MBItems.occulus_item, "itemOcculus");
-		GameRegistry.registerItem(MBItems.infernoHelm, "infernoHelm");
+	/*	GameRegistry.registerItem(MBItems.infernoHelm, "infernoHelm");
 		GameRegistry.registerItem(MBItems.infernoChest, "infernoChest");
 		GameRegistry.registerItem(MBItems.infernoLegs, "infernoLegs");
-		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots");
-		GameRegistry.registerItem(MBItems.feederTooth, "feederTooth");
-		GameRegistry.registerItem(MBItems.feederSword, "feederSword");
+		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots"); */
+		GameRegistry.registerItem(MBItems.feederTooth, "feederTooth"); 
+		GameRegistry.registerItem(MBItems.feederSword, "feederSword"); 
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");
@@ -137,10 +143,10 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronChest, new Object[] {"i i", "iii", "iii", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotInferno"}));
+	/*	GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoChest, new Object[] {"i i", "iii", "iii", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotInferno"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"})); */
 		
 		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
