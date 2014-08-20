@@ -101,7 +101,7 @@ public class MBEventHandler {
 	
 	@SubscribeEvent
 	public void changeBreakSpeed(BreakSpeed speed) {
-		if(speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null) {
+		if(speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null && ConfigHelper.powersEnabled) {
 			ExtendedPlayerProperties props = (ExtendedPlayerProperties) speed.entityPlayer.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME);
 			
 			if(props.getAbilityUsageAmount() > 0 && props.getPowersEnabled()) {
@@ -118,7 +118,7 @@ public class MBEventHandler {
 	
 	@SubscribeEvent
 	public void onLivingAttack(LivingAttackEvent event) {
-		if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityPlayer) {
+		if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityPlayer && ConfigHelper.powersEnabled) {
 			EntityPlayer player = (EntityPlayer)event.source.getEntity();
 			
 			if(player.getExtendedProperties(ExtendedPlayerProperties.PROP_NAME) != null) {

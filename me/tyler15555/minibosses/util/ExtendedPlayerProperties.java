@@ -1,24 +1,24 @@
 package me.tyler15555.minibosses.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 
-	private int lastAbilitySaveCount = 5;
 	private int currentAbilitySaveCount;
 	private boolean powersOn;
 	public static String PROP_NAME = "MB-Occulus-Use-Properties";
 	
 	public ExtendedPlayerProperties() {
-		
+	
 	}
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
-		compound.setInteger("abilityUses", lastAbilitySaveCount);
+		compound.setInteger("abilityUses", currentAbilitySaveCount);
 		compound.setBoolean("powersOn", powersOn);
 	}
 
@@ -34,7 +34,7 @@ public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 	}
 	
 	public void decreaseAbilityUsage() {
-		--lastAbilitySaveCount;
+		--currentAbilitySaveCount;
 	}
 	
 	public int getAbilityUsageAmount() {
@@ -42,7 +42,7 @@ public class ExtendedPlayerProperties implements IExtendedEntityProperties {
 	}
 	
 	public void setAbilityUsage(int amt) {
-		lastAbilitySaveCount = amt;
+		currentAbilitySaveCount = amt;
 	}
 	
 	public boolean getPowersEnabled() {

@@ -14,6 +14,7 @@ public class ConfigHelper {
 	public static boolean allowSlimeBlockCrafting;
 	public static boolean enableGiantSpawn;
 	public static boolean microBossesEnabled;
+	public static boolean powersEnabled;
 	public static int ironZombieSpawnRate;
 	public static int forestGuardSpawnRate;
 	public static int crawlerSpawnRate;
@@ -41,6 +42,7 @@ public class ConfigHelper {
 			infernoGolemSpawnRate = config.get("Spawning", "infernoGolemSpawnRate", 10).getInt(10);
 			addMiniBossesToDungeons = config.get("General", "addMiniBossesToDungeons", true).getBoolean(true);
 			addLootToDungeons = config.get("General", "addLootToDungeons", true).getBoolean(true);
+			powersEnabled = config.get("General", "powersEnabled", true).getBoolean(true);
 		} catch(Exception e) {
 			logger.log(Level.ERROR, "A severe error has occured when attempting to load the config file for this mod! Some options may not be the way you set them!");
 		} finally {

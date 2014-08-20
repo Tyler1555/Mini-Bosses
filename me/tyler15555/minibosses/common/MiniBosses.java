@@ -74,18 +74,17 @@ public class MiniBosses {
 		
 		Resources.setupArmorMaterials();
 		
-		logger.log(Level.INFO, "NO CRASH YET");
-		
 		GameRegistry.registerItem(MBItems.ingotDarkIron, "ingotDarkIron");
 		GameRegistry.registerItem(MBItems.darkIronHelm, "darkIronHelm");
 		GameRegistry.registerItem(MBItems.darkIronChest, "darkIronChest");
 		GameRegistry.registerItem(MBItems.darkIronLegs, "darkIronLegs");
 		GameRegistry.registerItem(MBItems.darkIronBoots, "darkIronBoots");
 		GameRegistry.registerItem(MBItems.occulus_item, "itemOcculus");
-	/*	GameRegistry.registerItem(MBItems.infernoHelm, "infernoHelm");
+		GameRegistry.registerItem(MBItems.ingotInferno, "ingotInferno");
+		GameRegistry.registerItem(MBItems.infernoHelm, "infernoHelm");
 		GameRegistry.registerItem(MBItems.infernoChest, "infernoChest");
 		GameRegistry.registerItem(MBItems.infernoLegs, "infernoLegs");
-		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots"); */
+		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots"); 
 		GameRegistry.registerItem(MBItems.feederTooth, "feederTooth"); 
 		GameRegistry.registerItem(MBItems.feederSword, "feederSword"); 
 		
@@ -143,17 +142,17 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronChest, new Object[] {"i i", "iii", "iii", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotDarkIron"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.darkIronBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotDarkIron"}));
-	/*	GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotInferno"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoHelm, new Object[] {"iii", "i i", "xxx", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoChest, new Object[] {"i i", "iii", "iii", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotInferno"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"})); */
+		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"})); 
 		
 		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
 	
 	@EventHandler
 	public void finishLoading(FMLPostInitializationEvent event) {
-		
+		logger.log(Level.INFO, "Mini-Bosses has finished loading!");
 	}
 	
 	@EventHandler
@@ -164,6 +163,7 @@ public class MiniBosses {
 				
 				entityBanMap.put(data[0], Integer.valueOf(data[1]));
 			}
+			logger.log(Level.INFO, "Mod: " + message.getSender() + " has sent a ban request!");
 		}
 	}
 	
