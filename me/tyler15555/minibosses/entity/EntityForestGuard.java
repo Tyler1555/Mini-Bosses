@@ -57,7 +57,7 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(7.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(135D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4175D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4375D);
 	}
 	
 	@Override
@@ -95,11 +95,14 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 			this.setPosition(source.getEntity().posX, source.getEntity().posY, source.getEntity().posZ - 2);
 		}
 		if(this.rand.nextInt(19) == 1) {
-			for(int i = 0; i < MathHelper.getRandomIntegerInRange(rand, 3, 5); i++) {
-				EntitySprout sprout = new EntitySprout(this.worldObj);
-				
-				sprout.setPosition(this.posX, this.posY, this.posZ);
-				this.worldObj.spawnEntityInWorld(sprout);
+			if(FMLCommonHandler.instance().getSide() == Side.SERVER) {
+				for(int i = 0; i < MathHelper.getRandomIntegerInRange(rand, 3, 5); i++) {
+					//System.out.println("SHOULD SPAWN");
+					EntitySprout sprout = new EntitySprout(this.worldObj);
+					
+					sprout.setPosition(this.posX, this.posY, this.posZ);
+					this.worldObj.spawnEntityInWorld(sprout);
+				}
 			}
 		}
 		return true;

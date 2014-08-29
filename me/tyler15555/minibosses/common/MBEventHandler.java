@@ -131,7 +131,7 @@ public class MBEventHandler {
 					player.worldObj.spawnEntityInWorld(lightning);
 					props.decreaseAbilityUsage();
 					
-					System.out.println("USAGE REMAINING: " + props.getAbilityUsageAmount());
+					//System.out.println("USAGE REMAINING: " + props.getAbilityUsageAmount());
 				}
 			}
 		}

@@ -53,7 +53,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = "v1.1.2")
+@Mod(modid = "MiniBosses", name = "Mini-Bosses", version = Resources.MOD_VERSION)
 public class MiniBosses {
 	
 	public static org.apache.logging.log4j.Logger logger;

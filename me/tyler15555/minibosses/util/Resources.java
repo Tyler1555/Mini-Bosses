@@ -18,6 +18,8 @@ public class Resources {
 	public static ArmorMaterial inferno;
 	public static ToolMaterial feeder;
 	
+	public static final String MOD_VERSION = "1.2";
+	
 	//Stores mod's request to not allow an entity to spawn in a certain dimension. Messages should be formatted as EntityName:DimensionID
 	public static HashMap<String, Integer> entityBlockList = new HashMap();
 	
