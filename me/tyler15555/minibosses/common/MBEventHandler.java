@@ -4,6 +4,7 @@ import java.util.Random;
 
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
+import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
 import me.tyler15555.minibosses.util.IMiniboss;
@@ -22,8 +23,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 
@@ -133,6 +136,19 @@ public class MBEventHandler {
 					
 					//System.out.println("USAGE REMAINING: " + props.getAbilityUsageAmount());
 				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingDeath(LivingDeathEvent event) {
+		if(event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)event.entity;
+			
+			if(player.inventory.hasItemStack(new ItemStack(MBItems.reviveHeart))) {
+				event.setResult(Result.DENY);
+				player.setHealth(player.getMaxHealth());
+				player.inventory.consumeInventoryItem(MBItems.reviveHeart);
 			}
 		}
 	}

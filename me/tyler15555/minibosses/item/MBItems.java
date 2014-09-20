@@ -22,5 +22,6 @@ public class MBItems {
 	public static Item infernoBoots = new ItemInfernoArmor(3).setUnlocalizedName("infernoBoots").setTextureName("minibosses:inferno_boots"); 
 	public static Item feederTooth = new Item().setUnlocalizedName("feederTooth").setTextureName("minibosses:feeder_tooth").setCreativeTab(Resources.tabMB);
 	public static Item feederSword = new ItemFeederSword();
+	public static Item reviveHeart = new ItemReviveHeart();
 
 }
