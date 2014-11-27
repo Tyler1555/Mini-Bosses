@@ -18,7 +18,7 @@ public class ItemReviveHeart extends Item {
 
 	public ItemReviveHeart() {
 		setUnlocalizedName("reviveHeart");
-		setTextureName("minibosses:revive_heart");
+		setTextureName("minibosses:revive_heart"); //I currently have no idea how textures work in 1.8
 		setCreativeTab(Resources.tabMB);
 	}
 	
@@ -47,6 +47,7 @@ public class ItemReviveHeart extends Item {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+		list.add(EnumChatFormatting.GOLD + "Legendary");
 		list.add(EnumChatFormatting.DARK_PURPLE + "This heart is said to give great strength and");
 		list.add(EnumChatFormatting.DARK_PURPLE + "long life to its owner");
 	}

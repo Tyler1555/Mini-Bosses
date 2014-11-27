@@ -1,7 +1,9 @@
 package me.tyler15555.minibosses.common;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import scala.actors.threadpool.Arrays;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.item.MBItems;
@@ -24,6 +26,7 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -34,6 +37,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class MBEventHandler {
 
 	private final Random random = new Random();
+	private final ArrayList playersToSave = new ArrayList();
 	
 	@SubscribeEvent
 	public void onEntitySpawn(EntityJoinWorldEvent event) {
@@ -54,7 +58,7 @@ public class MBEventHandler {
 				skeleton.setSkeletonType(0);
 				skeleton.copyLocationAndAnglesFrom(horse);
 				event.world.spawnEntityInWorld(skeleton);
-				horse.func_152120_b(skeleton.getCommandSenderName()); //Sets the owner of the horse
+				horse.func_152120_b(skeleton.getName()); //Sets the owner of the horse
 				horse.setHorseTamed(true);
 				skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 				skeleton.mountEntity(horse);
@@ -66,7 +70,7 @@ public class MBEventHandler {
 			}
 			if(event.entity instanceof IMiniboss) {
 				IMiniboss entity = (IMiniboss)event.entity;
-				if(Resources.entityBlockList.containsKey(entity.getBanlistName()) && Resources.entityBlockList.get(entity.getBanlistName()) == event.entity.worldObj.provider.dimensionId) {
+				if(Resources.entityBlockList.containsKey(entity.getBanlistName()) && Resources.entityBlockList.get(entity.getBanlistName()) == event.entity.worldObj.provider.getDimensionId()) {
 					event.entity.setDead();
 				}
 			}
@@ -85,18 +89,18 @@ public class MBEventHandler {
 	@SubscribeEvent
 	public void onBlockBreak(BreakEvent event) {
 		if(!event.world.isRemote && random.nextInt(199) == 1) {
-			if(event.block == Blocks.dirt) {
+			if(event.world.getBlockState(event.pos).getBlock() == Blocks.dirt) { //This weird method is currently the only way I know how to get a block at a position
 				EntityLivingBlock livingBlock = new EntityLivingBlock(event.world);
 				
 				livingBlock.setBlockType(0);
-				livingBlock.setPosition(event.x, event.y, event.z);
+				livingBlock.setPosition(event.pos.getX(), event.pos.getY(), event.pos.getZ());
 				event.world.spawnEntityInWorld(livingBlock);
 			}
-			if(event.block == Blocks.stone) {
+			if(event.world.getBlockState(event.pos).getBlock() == Blocks.stone) {
                 EntityLivingBlock livingBlockStone = new EntityLivingBlock(event.world);
 				
 				livingBlockStone.setBlockType(1);
-				livingBlockStone.setPosition(event.x, event.y, event.z);
+				livingBlockStone.setPosition(event.pos.getX(), event.pos.getY(), event.pos.getZ());
 				event.world.spawnEntityInWorld(livingBlockStone);
 			}
 		}
@@ -146,10 +150,25 @@ public class MBEventHandler {
 			EntityPlayer player = (EntityPlayer)event.entity;
 			
 			if(player.inventory.hasItemStack(new ItemStack(MBItems.reviveHeart))) {
-				event.setResult(Result.DENY);
+				event.setCanceled(true);
 				player.setHealth(player.getMaxHealth());
 				player.inventory.consumeInventoryItem(MBItems.reviveHeart);
+				playersToSave.add(player);
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerDrops(PlayerDropsEvent event) {
+		if(playersToSave.contains(event.entityPlayer)) {
+			for(int i = 0; i < event.drops.size(); i++) {
+				if(event.drops.get(i).getEntityItem().getItem() == MBItems.reviveHeart) {
+					event.drops.remove(i);
+				}
+				event.setCanceled(true);
+				event.entityPlayer.inventory.setInventorySlotContents(i, event.drops.get(i).getEntityItem());
+			}
+			playersToSave.remove(event.entityPlayer);
 		}
 	}
 	
