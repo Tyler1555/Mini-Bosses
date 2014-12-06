@@ -21,6 +21,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -28,14 +29,13 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 
 	public EntityCrawler(World par1World) {
 		super(par1World);
-		this.getNavigator().setBreakDoors(true);
 		this.tasks.addTask(0, new EntityAILookIdle(this));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
 		this.tasks.addTask(4, new EntityAIBreakDoor(this));
 		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	public String getDeathSound() {
 		return "minibosses:crawlerdeath";
 	}
-	
+	//I assume getDefaultState() is the correct method to use for setting a block now
 	@Override
 	public void setDead() {
 		super.setDead();
@@ -89,15 +89,15 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 			int z = MathHelper.floor_double(this.posZ);
 			
 			for(int i = 0; i < 9; i++) {
-				world.setBlock(x, y + i, z, Blocks.nether_brick_fence);
+				world.setBlockState(new BlockPos(x, y + i, z), Blocks.nether_brick_fence.getDefaultState()); //The variable i controls how far up the fence goes 
 			}
 			for(int j = 0; j < 3; j++) {
-				world.setBlock(x, y + 9, z + j, Blocks.nether_brick_fence);
-				world.setBlock(x, y + 9 - j, z + 2, Blocks.web);
+				world.setBlockState(new BlockPos(x, y + 9, z + j), Blocks.nether_brick_fence.getDefaultState()); //Here j controls how far out the fences are placed
+				world.setBlockState(new BlockPos(x, y + 9 - j, z + 2), Blocks.web.getDefaultState()); //The variable "j" is there to lower the webs as they are placed
 			}
-			world.setBlock(x, y + 6, z + 2, Blocks.chest);
+			world.setBlockState(new BlockPos(x, y + 6, z + 2), Blocks.chest.getDefaultState());
 			
-			TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y + 6, z + 2);
+			TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y + 6, z + 2));
 			
 			if(chest != null) {
 				ItemStack loot1 = new ItemStack(Items.diamond_sword);

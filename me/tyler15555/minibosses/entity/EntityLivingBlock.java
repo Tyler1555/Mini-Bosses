@@ -22,7 +22,7 @@ public class EntityLivingBlock extends EntityMob implements IMiniboss {
 		this.tasks.addTask(0, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 	
 	@Override

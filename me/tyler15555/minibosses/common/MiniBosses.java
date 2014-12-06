@@ -7,7 +7,6 @@ import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityFeeder;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
-import me.tyler15555.minibosses.entity.EntityGlider;
 import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
@@ -22,6 +21,7 @@ import me.tyler15555.minibosses.tileentity.TileEntityMedusaStone;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
+
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityGiantZombie;
@@ -116,7 +116,6 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityLivingBlock.class, "MB-LivingBlock", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "MB-Watcher", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.WHITE.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityFeeder.class, "MB-Feeder", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.WHITE.getRGB());
-		EntityRegistry.registerGlobalEntityID(EntityGlider.class, "DEBUG_ENTITY", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.BLACK.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityTombGuard.class, "MB-TombGuard", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityInfernoGolem.class, "MB-InfernoGolem", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.LIGHT_GRAY.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntitySprout.class, "MB-Sprout", EntityRegistry.findGlobalUniqueEntityId());
