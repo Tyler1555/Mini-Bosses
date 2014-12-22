@@ -49,10 +49,6 @@ public class CommandMiniBosses extends CommandBase {
 		return sender instanceof EntityPlayer;
 	}
 
-	@Override
-	public List addTabCompletionOptions(ICommandSender var1, String[] var2) {
-		return null;
-	}
 
 	@Override
 	public boolean isUsernameIndex(String[] var1, int var2) {

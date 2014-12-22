@@ -18,7 +18,6 @@ public class ItemReviveHeart extends Item {
 
 	public ItemReviveHeart() {
 		setUnlocalizedName("reviveHeart");
-		setTextureName("minibosses:revive_heart"); //I currently have no idea how textures work in 1.8
 		setCreativeTab(Resources.tabMB);
 	}
 	

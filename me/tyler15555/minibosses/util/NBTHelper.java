@@ -10,7 +10,7 @@ public class NBTHelper {
 	}
 	
 	private static void createNBTData(ItemStack stack) {
-		if(stack.stackSize == 1 && stack.stackTagCompound == null) {
+		if(stack.stackSize == 1 && stack.getTagCompound() == null) {
 			stack.setTagCompound(new NBTTagCompound());
 		} else {
 			return;

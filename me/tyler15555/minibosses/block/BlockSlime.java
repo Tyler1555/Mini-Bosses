@@ -7,16 +7,21 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockSlime extends Block {
 
+	//TODO: Make some changes to make this behave a bit more like the 1.8 slime block
+	
 	public BlockSlime() {
 		super(Material.sponge);
 		setUnlocalizedName("blockFertileSlime");
-		setBlockTextureName("minibosses:slime_block");
+		
 		setCreativeTab(Resources.tabMB);
 	}
 	
@@ -26,8 +31,13 @@ public class BlockSlime extends Block {
 	}
 	
 	@Override
-	public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beaconPos) {
-		return true;
+	public boolean isBeaconBase(IBlockAccess world, BlockPos pos, BlockPos beaconPos) {
+		for(BiomeGenBase swamp : BiomeDictionary.getBiomesForType(Type.SWAMP)) {
+			if(world.getBiomeGenForCoords(beaconPos) == swamp) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override

@@ -20,8 +20,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -51,8 +54,35 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	}
 	
 	@Override
+	public void entityInit() {
+		super.entityInit();
+		this.dataWatcher.addObject(13, Integer.valueOf(0));
+	}
+	
+	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setInteger("hasBeenAttacked", this.dataWatcher.getWatchableObjectInt(13));
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		this.dataWatcher.updateObject(13, tag.getInteger("hasBeenAttacked"));
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float damage) {
+		super.attackEntityFrom(source, damage);
+		if(source instanceof EntityDamageSource) {
+			this.getDataWatcher().updateObject(13, Integer.valueOf(1));
+		}
+		return true;
 	}
 	
 	@Override
@@ -82,7 +112,7 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	public void setDead() {
 		super.setDead();
 		
-		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && this.dataWatcher.getWatchableObjectInt(13) == 1) {
 			World world = this.worldObj;
 			int x = MathHelper.floor_double(this.posX);
 			int y = MathHelper.floor_double(this.posY);

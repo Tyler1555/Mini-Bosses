@@ -1,8 +1,10 @@
 package me.tyler15555.minibosses.client;
 import org.lwjgl.input.Keyboard;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderFallingBlock;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.settings.KeyBinding;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -12,7 +14,6 @@ import me.tyler15555.minibosses.common.CommonProxy;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityFeeder;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
-import me.tyler15555.minibosses.entity.EntityGlider;
 import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
@@ -28,17 +29,16 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers() {
 		System.out.println("[Minibosses] Registering entity renderers...");
-		RenderingRegistry.registerEntityRenderingHandler(EntityIronZombie.class, new RenderIronZombie());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySuperSlime.class, new RenderSlime(new ModelSlime(16), new ModelSlime(0), 0.25F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityForestGuard.class, new RenderForestGuard());
-		RenderingRegistry.registerEntityRenderingHandler(EntityCrawler.class, new RenderCrawler());
-		RenderingRegistry.registerEntityRenderingHandler(EntityLivingBlock.class, new RenderLivingBlock());
-		RenderingRegistry.registerEntityRenderingHandler(EntityWatcher.class, new RenderWatcher());
-		RenderingRegistry.registerEntityRenderingHandler(EntityGlider.class, new RenderGlider());
-		RenderingRegistry.registerEntityRenderingHandler(EntityFeeder.class, new RenderFeeder());
-		RenderingRegistry.registerEntityRenderingHandler(EntityTombGuard.class, new RenderTombGuard());
-		RenderingRegistry.registerEntityRenderingHandler(EntityInfernoGolem.class, new RenderInfernoGolem());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout());
+		RenderingRegistry.registerEntityRenderingHandler(EntityIronZombie.class, new RenderIronZombie(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySuperSlime.class, new RenderSlime(Minecraft.getMinecraft().getRenderManager(), new ModelSlime(16), 0.25F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityForestGuard.class, new RenderForestGuard(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCrawler.class, new RenderCrawler(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLivingBlock.class, new RenderLivingBlock(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWatcher.class, new RenderWatcher(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFeeder.class, new RenderFeeder(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTombGuard.class, new RenderTombGuard(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityInfernoGolem.class, new RenderInfernoGolem(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout(Minecraft.getMinecraft().getRenderManager()));
 		System.out.println("[Minibosses] Successfully registered all entity renderers!");
 	}
 	

@@ -20,7 +20,6 @@ public class ItemOcculus extends Item {
 	public ItemOcculus() {
 		setCreativeTab(Resources.tabMB);
 		setUnlocalizedName("itemOcculus");
-		setTextureName("minibosses:occulus");
 	}
 	
 	@Override

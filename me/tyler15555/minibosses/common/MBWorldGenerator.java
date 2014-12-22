@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.EnumSkyBlock;
@@ -30,7 +31,7 @@ public class MBWorldGenerator implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		switch(world.provider.dimensionId) {
+		switch(world.provider.getDimensionId()) {
 		case 0:
 			generateSurface(world, chunkX, chunkZ, random);
 		}
@@ -41,11 +42,11 @@ public class MBWorldGenerator implements IWorldGenerator {
 		int posY = random.nextInt(128);
 		int posZ = random.nextInt(16) + chunkZ;
 		
-		if(world.getBlock(posX, posY, posZ) == Blocks.stone) {
+		if(world.getBlockState(new BlockPos(posX, posY, posZ)) == Blocks.stone.getDefaultState()) {
 			WorldGenHelper.generateSolidCube(world, posX, posY, posZ, MBBlocks.cryptStone, 8, 8, 8);
-			world.setBlock(posX + 4, posY + 4, posZ + 4, Blocks.chest);
+			world.setBlockState(new BlockPos(posX + 4, posY + 4, posZ + 4), Blocks.chest.getDefaultState());
 			
-			TileEntityChest chest = (TileEntityChest) world.getTileEntity(posX + 4, posY + 4, posZ + 4);
+			TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(posX + 4, posY + 4, posZ + 4));
 			
 			if(chest != null) { //So we don't crash the game if another structure overwrites the chest
 				Item[] possibleLoot = new Item[] {Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.emerald, Items.bone, Items.coal, Items.rotten_flesh, Items.carrot, Items.golden_apple};
@@ -54,7 +55,7 @@ public class MBWorldGenerator implements IWorldGenerator {
 					chest.setInventorySlotContents(i, new ItemStack(possibleLoot[random.nextInt(possibleLoot.length)], MathHelper.getRandomIntegerInRange(random, 1, 5)));
 				}
 			}
-			//System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ); Used for finding naturally generating structures. Uncomment this line if you want to be a dirty cheater. You dirty cheater.
+			//System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ); Used for finding naturally generating structures for debugging. Uncomment this line if you want to be a dirty cheater. You dirty cheater.
 		}
 	}
 

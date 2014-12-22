@@ -22,7 +22,6 @@ public class BlockCryptStone extends Block {
 	protected BlockCryptStone() {
 		super(Material.rock);
 		setUnlocalizedName("cryptStone");
-		setBlockTextureName("minibosses:crypt_stone");
 		setCreativeTab(Resources.tabMB);
 		setHarvestLevel("pickaxe", 2);
 	}

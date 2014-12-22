@@ -24,6 +24,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
@@ -80,7 +81,7 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		if(this.worldObj.isRaining() || this.isInWater()) {
 			this.addPotionEffect(new PotionEffect(Potion.regeneration.id, 500, 4));
 		}
-		if(this.worldObj.isDaytime() && this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) {
+		if(this.worldObj.isDaytime() && this.worldObj.canBlockSeeSky(new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ))) {
 			this.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 500, 4));
 		}
 	}
@@ -119,16 +120,16 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 			int z = (int)this.posZ;
 			
 			for(int i = 0; i < 5; i++) {
-				this.worldObj.setBlock(x, y + i, z, Blocks.log);
+				this.worldObj.setBlockState(new BlockPos(x, y + i, z), Blocks.log.getDefaultState());
 			}
-			this.worldObj.setBlock(x, y + 5, z, Blocks.leaves);
-			this.worldObj.setBlock(x + 1, y + 4, z, Blocks.leaves);
-			this.worldObj.setBlock(x - 1, y + 4, z, Blocks.leaves);
-			this.worldObj.setBlock(x, y + 4, z + 1, Blocks.leaves);
-			this.worldObj.setBlock(x, y + 4, z - 1, Blocks.leaves);
-			this.worldObj.setBlock(x, y + 6, z, Blocks.chest);
+			this.worldObj.setBlockState(new BlockPos(x, y + 5, z), Blocks.leaves.getDefaultState());
+			this.worldObj.setBlockState(new BlockPos(x + 1, y + 4, z), Blocks.leaves.getDefaultState());
+			this.worldObj.setBlockState(new BlockPos(x - 1, y + 4, z), Blocks.leaves.getDefaultState());
+			this.worldObj.setBlockState(new BlockPos(x, y + 4, z + 1), Blocks.leaves.getDefaultState());
+			this.worldObj.setBlockState(new BlockPos(x, y + 4, z - 1), Blocks.leaves.getDefaultState());
+			this.worldObj.setBlockState(new BlockPos(x, y + 6, z), Blocks.chest.getDefaultState());
 			
-			TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(x, y + 6, z);
+			TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(new BlockPos(x, y + 6, z));
 			if(chest != null) {
 				ItemStack stack = new ItemStack(Items.diamond_axe);
 				EnchantmentHelper.addRandomEnchantment(rand, stack, 2);
@@ -140,12 +141,12 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
 		return this.getDataWatcher().getWatchableObjectInt(12) < 4;
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList();
 		
 		ret.add(new ItemStack(Blocks.leaves));
