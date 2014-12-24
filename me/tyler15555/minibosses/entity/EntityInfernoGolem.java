@@ -24,11 +24,13 @@ public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
 	}
 	
 	@Override
-	protected void attackEntity(Entity entity, float par2) {
-		super.attackEntity(entity, par2);
+	public boolean attackEntityAsMob(Entity entity) {
+		super.attackEntityAsMob(entity);
 		if(this.rand.nextInt(19) == 1) {
 			entity.setFire(8);
+			return true;
 		}
+		return true;
 	}
 
 	@Override

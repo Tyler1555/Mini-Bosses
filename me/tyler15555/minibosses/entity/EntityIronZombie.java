@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityIronZombie extends EntityZombie implements IMiniboss {
@@ -49,7 +50,7 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 			this.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2000));
 		}
 		if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && this.isDarkIron()) {
-			this.worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0, 0, 0);
+			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0, 0, 0);
 		}
 	}
 	

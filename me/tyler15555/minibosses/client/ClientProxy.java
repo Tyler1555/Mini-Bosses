@@ -1,15 +1,4 @@
 package me.tyler15555.minibosses.client;
-import org.lwjgl.input.Keyboard;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelSlime;
-import net.minecraft.client.renderer.entity.RenderFallingBlock;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSlime;
-import net.minecraft.client.settings.KeyBinding;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import me.tyler15555.minibosses.common.CommonProxy;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityFeeder;
@@ -21,6 +10,17 @@ import me.tyler15555.minibosses.entity.EntitySprout;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
 import me.tyler15555.minibosses.entity.EntityTombGuard;
 import me.tyler15555.minibosses.entity.EntityWatcher;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelSlime;
+import net.minecraft.client.renderer.entity.RenderSlime;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import org.lwjgl.input.Keyboard;
+
+
 
 public class ClientProxy extends CommonProxy {
 
@@ -42,10 +42,10 @@ public class ClientProxy extends CommonProxy {
 		System.out.println("[Minibosses] Successfully registered all entity renderers!");
 	}
 	
-	@Override
-	public int registerDarkArmorRenderPrefix() {
-		return RenderingRegistry.addNewArmourRendererPrefix("dark_iron");
-	}
+	//@Override
+	//public int registerDarkArmorRenderPrefix() {
+	//	return RenderingRegistry.this.;
+	//}
 	
 	@Override
 	public void registerKeyBindings() {
@@ -53,9 +53,9 @@ public class ClientProxy extends CommonProxy {
 		FMLCommonHandler.instance().bus().register(new KeyInputHandler());
 	}
 	
-	@Override
-	public int registerInfernoArmorRenderPrefix() {
-		return RenderingRegistry.addNewArmourRendererPrefix("inferno");
-	}
+	//@Override
+	//public int registerInfernoArmorRenderPrefix() {
+	//	return RenderingRegistry.addNewArmourRendererPrefix("inferno");
+	//}
 	
 }

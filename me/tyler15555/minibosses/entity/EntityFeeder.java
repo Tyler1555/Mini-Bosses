@@ -27,13 +27,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityFeeder extends EntityMob implements IRangedAttackMob, IMiniboss {
+public class EntityFeeder extends EntityMob implements IMiniboss {
 
 	//TODO: Fix targeting errors, all features involving other mobs are temp disabled
 	
 	//public int imitatingEntityID;
-	
-	public EntityAIArrowAttack arrowAI = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	
 	public EntityFeeder(World par1World) {
 		super(par1World);
@@ -131,14 +129,6 @@ public class EntityFeeder extends EntityMob implements IRangedAttackMob, IMinibo
 		}
 	} */
 
-	//Just the skeletons arrow code without the enchantments
-	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase entity, float var2) {
-		EntityArrow entityarrow = new EntityArrow(this.worldObj, this, entity, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
-		entityarrow.setDamage((double)(var2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
-		this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.worldObj.spawnEntityInWorld(entityarrow);
-	}
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {

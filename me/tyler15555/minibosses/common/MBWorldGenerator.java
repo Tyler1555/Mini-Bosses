@@ -21,7 +21,7 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class MBWorldGenerator implements IWorldGenerator {
+public class MBWorldGenerator implements IWorldGenerator, net.minecraftforge.fml.common.IWorldGenerator {
 
 	
 	

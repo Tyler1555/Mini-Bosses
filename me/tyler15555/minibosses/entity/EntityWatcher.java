@@ -39,14 +39,16 @@ public class EntityWatcher extends EntityMob implements IMiniboss {
 	}
 	
 	@Override
-	public void attackEntity(Entity entity, float f) {
-		super.attackEntity(entity, f);
+	public boolean attackEntityAsMob(Entity entity) {
+		super.attackEntityAsMob(entity);
 		if(this.rand.nextInt(100) == 1 && entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer)entity;
 			
 			player.addPotionEffect(new PotionEffect(Potion.blindness.id, 600));
 			player.addPotionEffect(new PotionEffect(Potion.confusion.id, 600));
+			return true;
 		}
+		return true;
 	}
 	
 	@Override

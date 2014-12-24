@@ -114,7 +114,6 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		super.setDead();
 		
 		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && this.getDataWatcher().getWatchableObjectInt(13) == 1) {
-			int treeSpawnCounter = 0;
 			int x = (int)this.posX;
 			int y = (int)this.posY;
 			int z = (int)this.posZ;

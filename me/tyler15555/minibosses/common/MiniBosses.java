@@ -19,9 +19,7 @@ import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.network.PacketHandler;
 import me.tyler15555.minibosses.tileentity.TileEntityMedusaStone;
 import me.tyler15555.minibosses.util.ConfigHelper;
-import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
-
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityGiantZombie;
@@ -35,24 +33,25 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms.IMCEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.Logger;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
+
+
 
 @Mod(modid = "MiniBosses", name = "Mini-Bosses", version = Resources.MOD_VERSION)
 public class MiniBosses {
@@ -160,7 +159,7 @@ public class MiniBosses {
 	
 	@EventHandler
 	public void handleIMC(IMCEvent event) {
-		for(IMCMessage message : event.getMessages()) {
+		for(net.minecraftforge.fml.common.event.FMLInterModComms.IMCMessage message : event.getMessages()) {
 			if(message.isStringMessage() && message.getStringValue().contains(":")) {
 				String[] data = message.getStringValue().split(":");
 				

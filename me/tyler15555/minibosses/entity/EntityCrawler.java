@@ -42,15 +42,17 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	}
 	
 	@Override
-	protected void attackEntity(Entity entity, float par2) {
-		super.attackEntity(entity, par2);
+	public boolean attackEntityAsMob(Entity entity) {
+		super.attackEntityAsMob(entity);
 		if(this.rand.nextInt(99) == 1 && !this.worldObj.isRemote) {
 			for(int i = 0; i < 3; i++) {
 				EntitySpider spider = new EntitySpider(this.worldObj);
 				spider.copyLocationAndAnglesFrom(entity);
 				this.worldObj.spawnEntityInWorld(spider);
 			}
+			return true;
 		}
+		return true;
 	}
 	
 	@Override
