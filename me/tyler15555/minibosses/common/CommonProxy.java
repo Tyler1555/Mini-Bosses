@@ -1,9 +1,11 @@
 package me.tyler15555.minibosses.common;
 
+import org.apache.logging.log4j.Level;
+
 public class CommonProxy {
 
 	public void registerRenderers() {
-		System.out.println("[MiniBosses] Detected server side, skipping renderer registration");
+		MiniBosses.logger.log(Level.INFO, "Detected server side, skipping render registration");
 	}
 	
 	public int registerDarkArmorRenderPrefix() {
@@ -11,7 +13,7 @@ public class CommonProxy {
 	}
 	
 	public void registerKeyBindings() {
-		System.out.println("[MiniBosses] Detected server side, skipping key binding registration");
+		MiniBosses.logger.log(Level.INFO, "Detected server side, skipping key binding registration");
 	}
 	
 	public int registerInfernoArmorRenderPrefix() {

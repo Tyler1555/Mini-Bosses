@@ -49,8 +49,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import org.apache.logging.log4j.Level;
 
-import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-
 
 
 @Mod(modid = "MiniBosses", name = "Mini-Bosses", version = Resources.MOD_VERSION)

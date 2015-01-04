@@ -16,7 +16,7 @@ public class PacketHandler {
 	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("MB-Keys");
 	
 	public static void init() {
-		instance.registerMessage(MessageKey.class, MessageKey.class, 0, Side.SERVER);
+		//instance.registerMessage(MessageKey.class, MessageKey.class, 0, Side.CLIENT);
 	}
 
 }

@@ -1,9 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.util.IMiniboss;
-import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,6 +24,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+
+
 
 public class EntityCrawler extends EntityMob implements IMiniboss {
 

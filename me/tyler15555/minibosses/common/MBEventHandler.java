@@ -3,8 +3,6 @@ package me.tyler15555.minibosses.common;
 import java.util.ArrayList;
 import java.util.Random;
 
-import scala.actors.threadpool.Arrays;
-import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
@@ -29,8 +27,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+
 
 
 

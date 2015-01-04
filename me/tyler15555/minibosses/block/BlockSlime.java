@@ -20,7 +20,7 @@ public class BlockSlime extends Block {
 	
 	public BlockSlime() {
 		super(Material.sponge);
-		setUnlocalizedName("blockFertileSlime");
+		setUnlocalizedName("blockSlime");
 		
 		setCreativeTab(Resources.tabMB);
 	}

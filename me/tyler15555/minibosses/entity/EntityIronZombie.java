@@ -1,15 +1,10 @@
 package me.tyler15555.minibosses.entity;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.IMiniboss;
-import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -17,6 +12,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+
+
 
 public class EntityIronZombie extends EntityZombie implements IMiniboss {
 
@@ -35,7 +34,7 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.getDataWatcher().addObject(15, Integer.valueOf(0));
+		this.getDataWatcher().addObject(16, Integer.valueOf(0));
 	}
 	
 	@Override
@@ -55,7 +54,7 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 	}
 	
 	public boolean isDarkIron() {
-		return this.getDataWatcher().getWatchableObjectInt(15) == 1;
+		return this.getDataWatcher().getWatchableObjectInt(16) == 1;
 	}
 	
 	
@@ -92,16 +91,16 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setInteger("isDarkIron", this.dataWatcher.getWatchableObjectInt(15));
+		tag.setInteger("isDarkIron", this.dataWatcher.getWatchableObjectInt(16));
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		if(tag.getInteger("isDarkIron") == 1) {
-			this.getDataWatcher().updateObject(15, Integer.valueOf(1));
+			this.getDataWatcher().updateObject(16, Integer.valueOf(1));
 		} else {
-			this.getDataWatcher().updateObject(15, Integer.valueOf(0));
+			this.getDataWatcher().updateObject(16, Integer.valueOf(0));
 		}
 	}
 	
