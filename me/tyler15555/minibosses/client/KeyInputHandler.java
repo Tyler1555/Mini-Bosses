@@ -3,8 +3,12 @@ package me.tyler15555.minibosses.client;
 import me.tyler15555.minibosses.network.MessageKey;
 import me.tyler15555.minibosses.network.PacketHandler;
 import me.tyler15555.minibosses.util.KeyType;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.fml.relauncher.Side;
+
+
 
 public class KeyInputHandler {
 

@@ -1,7 +1,5 @@
 package me.tyler15555.minibosses.item;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.Entity;
@@ -14,6 +12,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class ItemOcculus extends Item {
 

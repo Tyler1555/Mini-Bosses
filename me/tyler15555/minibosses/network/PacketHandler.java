@@ -2,7 +2,9 @@ package me.tyler15555.minibosses.network;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
+
+
 
 
 
@@ -16,7 +18,7 @@ public class PacketHandler {
 	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("MB-Keys");
 	
 	public static void init() {
-		//instance.registerMessage(MessageKey.class, MessageKey.class, 0, Side.CLIENT);
+		instance.registerMessage(MessageKey.class, MessageKey.class, 0, Side.CLIENT);
 	}
 
 }

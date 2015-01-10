@@ -15,7 +15,7 @@ public class RenderIronZombie extends RenderZombie {
 	}
 	
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving entity) {
+	protected ResourceLocation func_180578_a(EntityZombie entity) { //In vanilla MC this method returns a skin based on what kind of villager the zombie is, it needs to be overridden to provide my textures
 		EntityIronZombie zombie = (EntityIronZombie)entity;
 		if(zombie.isDarkIron()) {
 			return new ResourceLocation("minibosses", "textures/entity/dark_iron_zombie.png");

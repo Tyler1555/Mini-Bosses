@@ -1,4 +1,5 @@
 package me.tyler15555.minibosses.client;
+
 import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.common.CommonProxy;
 import me.tyler15555.minibosses.common.MiniBosses;
@@ -29,6 +30,7 @@ import org.lwjgl.input.Keyboard;
 
 
 
+
 public class ClientProxy extends CommonProxy {
 
 	protected static final KeyBinding toggleBind = new KeyBinding("key.toggle.powers", Keyboard.KEY_P, "key.catagories.minibosses");
@@ -54,7 +56,7 @@ public class ClientProxy extends CommonProxy {
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.cryptStone), 0, new ModelResourceLocation("minibosses:cryptStone", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.blockSlime), 0, new ModelResourceLocation("minibosses:blockSlime", "inventory"));
 		
-		renderItem.getItemModelMesher().register(MBItems.ingotDarkIron, 0, new ModelResourceLocation("minibosses:darkIron", "inventory"));
+		renderItem.getItemModelMesher().register(MBItems.ingotDarkIron, 0, new ModelResourceLocation("minibosses:ingotDarkIron", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.ingotInferno, 0, new ModelResourceLocation("minibosses:ingotInferno", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.darkIronHelm, 0, new ModelResourceLocation("minibosses:darkIronHelm", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.darkIronChest, 0, new ModelResourceLocation("minibosses:darkIronChest", "inventory"));
