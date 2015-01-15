@@ -28,7 +28,7 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(.45D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(.41D);
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 	
 	
 	public void setDarkIron() {
-		this.getDataWatcher().updateObject(15, Integer.valueOf(1));
+		this.getDataWatcher().updateObject(16, Integer.valueOf(1));
 	}
 	
 	@Override

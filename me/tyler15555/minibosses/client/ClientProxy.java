@@ -75,6 +75,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerKeyBindings() {
 		ClientRegistry.registerKeyBinding(toggleBind);
 		FMLCommonHandler.instance().bus().register(new KeyInputHandler());
+		MiniBosses.logger.log(Level.INFO, "Registered Key Bindings!");
 	}
 	
 }

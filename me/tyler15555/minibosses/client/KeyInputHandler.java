@@ -20,6 +20,7 @@ public class KeyInputHandler {
 	public void onKeyPressed(KeyInputEvent event) {
 		if(ClientProxy.toggleBind.isPressed()) {
 			PacketHandler.instance.sendToServer(new MessageKey(KeyType.TOGGLE_POWERS.code));
+			System.out.println("Message Sent");
 		}
 	}
 	
