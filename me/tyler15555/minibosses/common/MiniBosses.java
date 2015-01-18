@@ -17,7 +17,6 @@ import me.tyler15555.minibosses.entity.EntityTombGuard;
 import me.tyler15555.minibosses.entity.EntityWatcher;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.network.PacketHandler;
-import me.tyler15555.minibosses.tileentity.TileEntityMedusaStone;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.command.ServerCommandManager;
@@ -72,8 +71,6 @@ public class MiniBosses {
 		
 		Resources.setupArmorMaterials();
 		
-		GameRegistry.registerTileEntity(TileEntityMedusaStone.class, "medusaStone");
-		
 		GameRegistry.registerItem(MBItems.ingotDarkIron, "ingotDarkIron");
 		GameRegistry.registerItem(MBItems.darkIronHelm, "darkIronHelm");
 		GameRegistry.registerItem(MBItems.darkIronChest, "darkIronChest");
@@ -88,6 +85,8 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.feederTooth, "feederTooth"); 
 		GameRegistry.registerItem(MBItems.feederSword, "feederSword"); 
 		GameRegistry.registerItem(MBItems.reviveHeart, "reviveHeart");
+		GameRegistry.registerItem(MBItems.medusaEye, "medusaEye");
+		GameRegistry.registerItem(MBItems.dodgeGem, "dodgeGem");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");

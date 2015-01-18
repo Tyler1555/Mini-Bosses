@@ -3,15 +3,19 @@ package me.tyler15555.minibosses.common;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
 import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.MicroBossProperties;
+import me.tyler15555.minibosses.util.NBTHelper;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -20,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -141,6 +146,13 @@ public class MBEventHandler {
 				}
 			}
 		}
+		if(event.entityLiving instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)event.entityLiving;
+			
+			if(player.inventory.hasItem(MBItems.dodgeGem) && random.nextInt(100) >= 65) {
+				event.setCanceled(true);
+			}
+		}
 	}
 	
 	@SubscribeEvent
@@ -160,12 +172,13 @@ public class MBEventHandler {
 	@SubscribeEvent
 	public void onPlayerDrops(PlayerDropsEvent event) {
 		if(playersToSave.contains(event.entityPlayer)) {
-			for(int i = 0; i < event.drops.size(); i++) {
-				if(event.drops.get(i).getEntityItem().getItem() == MBItems.reviveHeart) {
-					event.drops.remove(i);
+			for(EntityItem drop : event.drops) {
+				if(drop.getEntityItem().getItem() == MBItems.reviveHeart) {
+					drop.setDead();
 				}
-				event.setCanceled(true);
-				event.entityPlayer.inventory.setInventorySlotContents(i, event.drops.get(i).getEntityItem());
+				if(drop.getEntityItem().getItem() == MBItems.dodgeGem) {
+					NBTHelper.writeIntToStack(drop.getEntityItem(), "ShortDespawn", 1);
+				}
 			}
 			playersToSave.remove(event.entityPlayer);
 		}

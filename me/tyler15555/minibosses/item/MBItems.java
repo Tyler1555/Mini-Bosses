@@ -23,5 +23,7 @@ public class MBItems {
 	public static Item feederTooth = new Item().setUnlocalizedName("feederTooth").setCreativeTab(Resources.tabMB);
 	public static Item feederSword = new ItemFeederSword();
 	public static Item reviveHeart = new ItemReviveHeart();
+	public static Item medusaEye = new ItemMedusaEye();
+	public static Item dodgeGem = new ItemDodgeGem();
 
 }
