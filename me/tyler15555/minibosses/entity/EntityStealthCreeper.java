@@ -1,11 +1,13 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -54,6 +56,16 @@ public class EntityStealthCreeper extends EntityCreeper implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "StealthCreeper";
+	}
+
+	@Override
+	public ItemStack getPossibleLoot() {
+		return new ItemStack(MBItems.dodgeGem);
+	}
+
+	@Override
+	public int getDropChance() {
+		return 70;
 	}
 
 }

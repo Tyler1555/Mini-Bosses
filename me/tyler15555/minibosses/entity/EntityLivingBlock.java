@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,6 +13,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -79,6 +81,16 @@ public class EntityLivingBlock extends EntityMob implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "LivingBlock";
+	}
+
+	@Override
+	public ItemStack getPossibleLoot() {
+		return new ItemStack(MBItems.dodgeGem);
+	}
+
+	@Override
+	public int getDropChance() {
+		return 90;
 	}
 
 }

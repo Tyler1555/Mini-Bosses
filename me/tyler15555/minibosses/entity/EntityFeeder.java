@@ -21,6 +21,7 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -178,6 +179,16 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "Feeder";
+	}
+
+	@Override
+	public ItemStack getPossibleLoot() {
+		return new ItemStack(MBItems.medusaEye);
+	}
+
+	@Override
+	public int getDropChance() {
+		return 85;
 	}
 	
 }

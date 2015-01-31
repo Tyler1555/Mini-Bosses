@@ -93,7 +93,7 @@ public class MBEventHandler {
 	@SubscribeEvent
 	public void onBlockBreak(BreakEvent event) {
 		if(!event.world.isRemote && random.nextInt(199) == 1) {
-			if(event.world.getBlockState(event.pos).getBlock() == Blocks.dirt) { //This weird method is currently the only way I know how to get a block at a position
+			if(event.world.getBlockState(event.pos).getBlock() == Blocks.dirt) { 
 				EntityLivingBlock livingBlock = new EntityLivingBlock(event.world);
 				
 				livingBlock.setBlockType(0);

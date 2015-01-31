@@ -69,6 +69,11 @@ public class ClientProxy extends CommonProxy {
 		renderItem.getItemModelMesher().register(MBItems.infernoLegs, 0, new ModelResourceLocation("minibosses:infernoLegs", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.infernoBoots, 0, new ModelResourceLocation("minibosses:infernoBoots", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.occulus_item, 0, new ModelResourceLocation("minibosses:itemOcculus", "inventory"));
+		renderItem.getItemModelMesher().register(MBItems.medusaEye, 0, new ModelResourceLocation("minibosses:medusaEye", "inventory"));
+		renderItem.getItemModelMesher().register(MBItems.dodgeGem, 0, new ModelResourceLocation("minibosses:dodgeGem", "inventory"));
+		renderItem.getItemModelMesher().register(MBItems.reviveHeart, 0, new ModelResourceLocation("minibosses:reviveHeart", "inventory"));
+		
+		MiniBosses.logger.log(Level.INFO, "Finished registering item renderers!");
 	}
 	
 	@Override

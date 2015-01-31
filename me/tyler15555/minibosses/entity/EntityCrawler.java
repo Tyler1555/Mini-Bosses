@@ -1,5 +1,6 @@
 package me.tyler15555.minibosses.entity;
 
+import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -159,6 +160,16 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "Crawler";
+	}
+
+	@Override
+	public ItemStack getPossibleLoot() {
+		return new ItemStack(MBItems.reviveHeart);
+	}
+
+	@Override
+	public int getDropChance() {
+		return 80;
 	}
 
 }

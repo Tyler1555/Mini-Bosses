@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
@@ -36,6 +37,16 @@ public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "InfernoGolem";
+	}
+
+	@Override
+	public ItemStack getPossibleLoot() {
+		return new ItemStack(MBItems.reviveHeart);
+	}
+
+	@Override
+	public int getDropChance() {
+		return 65;
 	}
 
 }

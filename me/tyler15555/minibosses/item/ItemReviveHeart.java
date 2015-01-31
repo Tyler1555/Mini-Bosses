@@ -32,7 +32,7 @@ public class ItemReviveHeart extends Item {
 	public int getEntityLifespan(ItemStack itemStack, World world) {
 		return 3000;
 	}
-	
+	/* Needs to be disabled right now due to an exploit :( Hopefully I'll be able to fix it soon
 	@Override
 	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
 		return armorType == 1 ? true : false;
@@ -42,7 +42,7 @@ public class ItemReviveHeart extends Item {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 500));
 		player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 500));
-	}
+	} */
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {

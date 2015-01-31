@@ -2,6 +2,7 @@ package me.tyler15555.minibosses.entity;
 
 import java.util.ArrayList;
 
+import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -172,5 +173,15 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 	@Override
 	public String getBanlistName() {
 		return "ForestGuard";
+	}
+
+	@Override
+	public ItemStack getPossibleLoot() {
+		return new ItemStack(MBItems.dodgeGem);
+	}
+
+	@Override
+	public int getDropChance() {
+		return 60;
 	}
 }
