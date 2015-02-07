@@ -167,6 +167,12 @@ public class MBEventHandler {
 				playersToSave.add(player);
 			}
 		}
+		if(event.entity instanceof IMiniboss) {
+			IMiniboss entity = (IMiniboss)event.entityLiving;
+			if(random.nextInt(100) >= entity.getDropChance()) {
+				event.entity.dropItem(entity.getPossibleLoot().getItem(), 1);
+			}
+		}
 	}
 	
 	@SubscribeEvent

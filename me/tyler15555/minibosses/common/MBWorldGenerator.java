@@ -33,7 +33,10 @@ public class MBWorldGenerator implements IWorldGenerator, net.minecraftforge.fml
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		switch(world.provider.getDimensionId()) {
 		case 0:
-			generateSurface(world, chunkX, chunkZ, random);
+				generateSurface(world, chunkX, chunkZ, random);
+			break;
+		default:
+			return;
 		}
 	}
 	
@@ -42,20 +45,30 @@ public class MBWorldGenerator implements IWorldGenerator, net.minecraftforge.fml
 		int posY = random.nextInt(128);
 		int posZ = random.nextInt(16) + chunkZ;
 		
-		if(world.getBlockState(new BlockPos(posX, posY, posZ)) == Blocks.stone.getDefaultState()) {
-			WorldGenHelper.generateSolidCube(world, posX, posY, posZ, MBBlocks.cryptStone, 8, 8, 8);
-			world.setBlockState(new BlockPos(posX + 4, posY + 4, posZ + 4), Blocks.chest.getDefaultState());
-			
-			TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(posX + 4, posY + 4, posZ + 4));
-			
-			if(chest != null) { //So we don't crash the game if another structure overwrites the chest
-				Item[] possibleLoot = new Item[] {Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.emerald, Items.bone, Items.coal, Items.rotten_flesh, Items.carrot, Items.golden_apple};
-				
-				for(int i = 0; i < MathHelper.getRandomIntegerInRange(random, 1, 9); i++) {
-					chest.setInventorySlotContents(i, new ItemStack(possibleLoot[random.nextInt(possibleLoot.length)], MathHelper.getRandomIntegerInRange(random, 1, 5)));
+		if(random.nextInt(100) >= 75) { //All these are here to try to make the structures much much much rarer. These numbers may need some tweaking
+			if(random.nextInt(100) >= 80) {
+				if(random.nextInt(100) >= 85) {
+					if(random.nextBoolean()) {
+						if(world.getBlockState(new BlockPos(posX, posY, posZ)) == Blocks.stone.getDefaultState()) {
+							WorldGenHelper.generateSolidCube(world, posX, posY, posZ, MBBlocks.cryptStone, 8, 8, 8);
+							world.setBlockState(new BlockPos(posX + 4, posY + 4, posZ + 4), Blocks.chest.getDefaultState());
+							
+							TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(posX + 4, posY + 4, posZ + 4));
+							
+							if(chest != null) { //So we don't crash the game if another structure overwrites the chest
+								Item[] possibleLoot = new Item[] {Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.emerald, Items.bone, Items.coal, Items.rotten_flesh, Items.carrot, Items.golden_apple};
+								
+								for(int i = 0; i < MathHelper.getRandomIntegerInRange(random, 1, 9); i++) {
+									chest.setInventorySlotContents(i, new ItemStack(possibleLoot[random.nextInt(possibleLoot.length)], MathHelper.getRandomIntegerInRange(random, 1, 5)));
+								}
+							}
+							System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ); 
+						} else {
+							return;
+						}
+					}
 				}
 			}
-			//System.out.println("Generated Tomb at: " + posX + " " + posY + " " + posZ); Used for finding naturally generating structures for debugging. Uncomment this line if you want to be a dirty cheater. You dirty cheater.
 		}
 	}
 

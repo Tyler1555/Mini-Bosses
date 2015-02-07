@@ -18,6 +18,7 @@ import me.tyler15555.minibosses.entity.EntityWatcher;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.network.PacketHandler;
 import me.tyler15555.minibosses.util.ConfigHelper;
+import me.tyler15555.minibosses.util.EntityFixEvents;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
@@ -103,6 +104,7 @@ public class MiniBosses {
 		OreDictionary.registerOre("ingotInferno", MBItems.ingotInferno);
 		
 		MinecraftForge.EVENT_BUS.register(new MBEventHandler());
+		//MinecraftForge.EVENT_BUS.register(new EntityFixEvents());
 		
 		EntityRegistry.registerGlobalEntityID(EntityIronZombie.class, "MB-IronZombie", EntityRegistry.findGlobalUniqueEntityId(), Color.GRAY.getRGB(), Color.BLACK.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityCrawler.class, "MB-Crawler", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.BLACK.getRGB());
