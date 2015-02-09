@@ -17,6 +17,7 @@ public class EntitySuperSlime extends EntitySlime implements IMiniboss {
 
 	public EntitySuperSlime(World par1World) {
 		super(par1World);
+		//this.setSlimeSize(15);
 	}
 	
 	@Override
@@ -41,7 +42,6 @@ public class EntitySuperSlime extends EntitySlime implements IMiniboss {
 	@Override
 	public void entityInit() {
 		super.entityInit();
-		this.setSlimeSize(MathHelper.getRandomIntegerInRange(rand, 10, 14));
 	}
 	
 	@Override
