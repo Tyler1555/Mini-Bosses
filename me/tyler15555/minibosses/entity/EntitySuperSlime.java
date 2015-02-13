@@ -4,6 +4,7 @@ import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.IMiniboss;
 import me.tyler15555.minibosses.util.Resources;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,13 +12,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class EntitySuperSlime extends EntitySlime implements IMiniboss {
 
 	public EntitySuperSlime(World par1World) {
 		super(par1World);
-		//this.setSlimeSize(15);
 	}
 	
 	@Override
@@ -104,5 +105,16 @@ public class EntitySuperSlime extends EntitySlime implements IMiniboss {
 	public int getDropChance() {
 		return 85;
 	}
+	
+	@Override
+	public void setSlimeSize(int size) {
+		super.setSlimeSize(size);
+	}
+	
+	@Override
+	public IEntityLivingData func_180482_a(DifficultyInstance difficulty, IEntityLivingData data) {
+		this.setSlimeSize(MathHelper.getRandomIntegerInRange(rand, 10, 15));
+        return data;
+    }
 
 }
