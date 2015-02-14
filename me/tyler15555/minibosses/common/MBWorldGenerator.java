@@ -3,25 +3,21 @@ package me.tyler15555.minibosses.common;
 import java.util.Random;
 
 import me.tyler15555.minibosses.block.MBBlocks;
-import me.tyler15555.minibosses.util.Resources;
 import me.tyler15555.minibosses.util.WorldGenHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
-public class MBWorldGenerator implements IWorldGenerator, net.minecraftforge.fml.common.IWorldGenerator {
+
+
+public class MBWorldGenerator implements IWorldGenerator {
 
 	
 	

@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Level;
 
 
 
-//This class exists to purge entities that were broken by updates to either MC or this mod, or to apply other entity work arounds due to changes in MC.
+//This class exists to purge entities that were broken by updates to either MC or this mod, or to apply other entity work arounds due to changes in MC. 
 public class EntityFixEvents {
 
 	public EntityFixEvents() {
