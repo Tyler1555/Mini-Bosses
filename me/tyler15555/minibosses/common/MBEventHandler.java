@@ -3,8 +3,6 @@ package me.tyler15555.minibosses.common;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
@@ -32,7 +30,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 
 
@@ -167,7 +167,7 @@ public class MBEventHandler {
 				playersToSave.add(player);
 			}
 		}
-		if(event.entity instanceof IMiniboss) {
+		if(event.entity instanceof IMiniboss && FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 			IMiniboss entity = (IMiniboss)event.entityLiving;
 			if(random.nextInt(100) >= entity.getDropChance()) {
 				event.entity.dropItem(entity.getPossibleLoot().getItem(), 1);

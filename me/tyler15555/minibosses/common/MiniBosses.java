@@ -20,6 +20,7 @@ import me.tyler15555.minibosses.network.PacketHandler;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.EntityFixEvents;
 import me.tyler15555.minibosses.util.Resources;
+import me.tyler15555.tileentity.TileEntitySummoningPillar;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityGiantZombie;
@@ -68,6 +69,8 @@ public class MiniBosses {
 		event.getModLog().log(Level.INFO, "Mini-Bosses is starting to load!");
 		logger = event.getModLog();
 		
+		GameRegistry.registerTileEntity(TileEntitySummoningPillar.class, "MB-SummonPillar");
+		
 		ConfigHelper.setupConfig(new Configuration(event.getSuggestedConfigurationFile()), event.getModLog());
 		
 		Resources.setupArmorMaterials();
@@ -88,9 +91,11 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.reviveHeart, "reviveHeart");
 		GameRegistry.registerItem(MBItems.medusaEye, "medusaEye");
 		GameRegistry.registerItem(MBItems.dodgeGem, "dodgeGem");
+		GameRegistry.registerItem(MBItems.summonScroll, "summonScroll");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");
+		GameRegistry.registerBlock(MBBlocks.summoningPillar, "summoningPillar");
 	}
 	
 	@EventHandler
