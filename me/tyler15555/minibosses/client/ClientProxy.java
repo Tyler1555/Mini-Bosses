@@ -14,6 +14,7 @@ import me.tyler15555.minibosses.entity.EntitySuperSlime;
 import me.tyler15555.minibosses.entity.EntityTombGuard;
 import me.tyler15555.minibosses.entity.EntityWatcher;
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.tileentity.TileEntitySummoningPillar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -34,6 +35,7 @@ import org.lwjgl.input.Keyboard;
 public class ClientProxy extends CommonProxy {
 
 	protected static final KeyBinding toggleBind = new KeyBinding("key.toggle.powers", Keyboard.KEY_P, "key.catagories.minibosses");
+	public static int SUMMON_PILLAR_RENDER_ID;
 	
 	@Override
 	public void registerRenderers() {
@@ -48,6 +50,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTombGuard.class, new RenderTombGuard(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernoGolem.class, new RenderInfernoGolem(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout(Minecraft.getMinecraft().getRenderManager()));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySummoningPillar.class, new SummoningPillarRenderer());
 		MiniBosses.logger.log(Level.INFO, "Finished registering entity renderers!");
 		
 		MiniBosses.logger.log(Level.INFO, "Registering item/block renderers");
@@ -55,6 +58,7 @@ public class ClientProxy extends CommonProxy {
 		
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.cryptStone), 0, new ModelResourceLocation("minibosses:cryptStone", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.blockSlime), 0, new ModelResourceLocation("minibosses:blockSlime", "inventory"));
+		//renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.summoningPillar), 0, new ModelResourceLocation("minibosses:summonPillar", "inventory"));
 		
 		renderItem.getItemModelMesher().register(MBItems.ingotDarkIron, 0, new ModelResourceLocation("minibosses:ingotDarkIron", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.ingotInferno, 0, new ModelResourceLocation("minibosses:ingotInferno", "inventory"));
@@ -72,6 +76,7 @@ public class ClientProxy extends CommonProxy {
 		renderItem.getItemModelMesher().register(MBItems.medusaEye, 0, new ModelResourceLocation("minibosses:medusaEye", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.dodgeGem, 0, new ModelResourceLocation("minibosses:dodgeGem", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.reviveHeart, 0, new ModelResourceLocation("minibosses:reviveHeart", "inventory"));
+		renderItem.getItemModelMesher().register(MBItems.summonScroll, 0, new ModelResourceLocation("minibosses:summonScroll", "inventory"));
 		
 		MiniBosses.logger.log(Level.INFO, "Finished registering item renderers!");
 	}
@@ -82,5 +87,4 @@ public class ClientProxy extends CommonProxy {
 		FMLCommonHandler.instance().bus().register(new KeyInputHandler());
 		MiniBosses.logger.log(Level.INFO, "Registered Key Bindings!");
 	}
-	
 }

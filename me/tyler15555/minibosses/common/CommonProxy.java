@@ -19,5 +19,4 @@ public class CommonProxy {
 	public int registerInfernoArmorRenderPrefix() {
 		return "inferno".length();
 	}
-	
 }

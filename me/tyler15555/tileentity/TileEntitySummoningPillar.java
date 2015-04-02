@@ -1,7 +1,12 @@
 package me.tyler15555.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class TileEntitySummoningPillar extends TileEntity {
 
@@ -24,6 +29,24 @@ public class TileEntitySummoningPillar extends TileEntity {
 		super.readFromNBT(tag);
 		bloodAmt = tag.getInteger("BloodAmount");
 		level = tag.getInteger("Level");
+	}
+	
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound syncData = new NBTTagCompound();
+		this.writeToNBT(syncData);
+		
+		return new S35PacketUpdateTileEntity(this.getPos(), 0, syncData);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+			this.readFromNBT(pkt.getNbtCompound());
+		} else {
+			//Never trust the client
+			return;
+		}
 	}
 	
 	public void setBloodAmount(int amt) {

@@ -20,8 +20,12 @@ public class ItemSummonScroll extends Item {
 	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
-		tooltip.add(EnumChatFormatting.GOLD + "Summons a " + NBTHelper.getStringFromStack(stack, "SummonName"));
-		tooltip.add(EnumChatFormatting.RED + "Life Force Required: " + NBTHelper.getIntFromStack(stack, "LifeReq"));
+		if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("SummonEntry")) {
+			String[] data = NBTHelper.getStringFromStack(stack, "SummonEntry").split(":");
+			tooltip.add(EnumChatFormatting.GOLD + "Summons a " + data[1]);
+			tooltip.add(EnumChatFormatting.RED + "Blood Required: " + data[2]);
+			tooltip.add(EnumChatFormatting.RED + "Pillar Level Required: " + data[3]);
+		}
 	}
 
 }
