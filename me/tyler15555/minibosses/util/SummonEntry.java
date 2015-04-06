@@ -21,7 +21,7 @@ public class SummonEntry {
 	}
 	
 	public void doSummon(int blood, int level, World world, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		if(blood <= bCost && level <= lReq) {
+		if(blood >= bCost && level >= lReq) {
 			Entity monster = (Entity) entityClass.getConstructor(World.class).newInstance(world);
 			monster.setPosition(x, y, z);
 			world.spawnEntityInWorld(monster);

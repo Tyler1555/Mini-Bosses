@@ -26,5 +26,6 @@ public class MBItems {
 	public static Item medusaEye = new ItemMedusaEye();
 	public static Item dodgeGem = new ItemDodgeGem();
 	public static Item summonScroll = new ItemSummonScroll();
+	public static Item bloodTablet = new ItemBloodTablet();
 
 }

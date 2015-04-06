@@ -1,12 +1,12 @@
 package me.tyler15555.minibosses.client;
 
-import org.lwjgl.opengl.GL11;
-
 import me.tyler15555.tileentity.TileEntitySummoningPillar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 //TODO: Add some fancy visuals
 public class SummoningPillarRenderer extends TileEntitySpecialRenderer {
 

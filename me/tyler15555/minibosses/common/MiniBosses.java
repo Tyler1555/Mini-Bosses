@@ -24,6 +24,7 @@ import me.tyler15555.tileentity.TileEntitySummoningPillar;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityGiantZombie;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -93,6 +94,7 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.medusaEye, "medusaEye");
 		GameRegistry.registerItem(MBItems.dodgeGem, "dodgeGem");
 		GameRegistry.registerItem(MBItems.summonScroll, "summonScroll");
+		GameRegistry.registerItem(MBItems.bloodTablet, "bloodTablet");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");
@@ -155,6 +157,7 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoChest, new Object[] {"i i", "iii", "iii", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"})); 
+		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.bloodTablet), new Object[] {Blocks.quartz_block, Items.gold_ingot});
 		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.summonScroll), new Object[] {Items.paper, Items.bone, Items.bow});
 		
 		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);

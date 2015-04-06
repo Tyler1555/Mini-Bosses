@@ -26,6 +26,7 @@ item.medusaEye.name=Eye of Medusa
 item.reviveHeart.name=Heart of The Savior
 item.dodgeGem.name=Forseer's Gem
 item.summonScroll.name=Summon Scroll
+item.bloodTablet.name=Blood Tablet
 tile.blockSlime.name=Slime Block
 tile.cryptStone.name=Crypt Stone
 key.catagories.minibosses=Mini-Bosses' Key Bindings

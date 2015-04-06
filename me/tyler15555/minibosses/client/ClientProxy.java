@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -58,7 +59,6 @@ public class ClientProxy extends CommonProxy {
 		
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.cryptStone), 0, new ModelResourceLocation("minibosses:cryptStone", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.blockSlime), 0, new ModelResourceLocation("minibosses:blockSlime", "inventory"));
-		//renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.summoningPillar), 0, new ModelResourceLocation("minibosses:summonPillar", "inventory"));
 		
 		renderItem.getItemModelMesher().register(MBItems.ingotDarkIron, 0, new ModelResourceLocation("minibosses:ingotDarkIron", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.ingotInferno, 0, new ModelResourceLocation("minibosses:ingotInferno", "inventory"));
