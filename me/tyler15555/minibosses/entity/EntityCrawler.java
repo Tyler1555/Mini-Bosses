@@ -1,7 +1,9 @@
 package me.tyler15555.minibosses.entity;
 
-import me.tyler15555.minibosses.item.MBItems;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.util.IMiniboss;
+import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,75 +20,39 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-
-
 
 public class EntityCrawler extends EntityMob implements IMiniboss {
 
 	public EntityCrawler(World par1World) {
 		super(par1World);
+		this.getNavigator().setBreakDoors(true);
 		this.tasks.addTask(0, new EntityAILookIdle(this));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
 		this.tasks.addTask(4, new EntityAIBreakDoor(this));
 		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 	
 	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
+	protected void attackEntity(Entity entity, float par2) {
+		super.attackEntity(entity, par2);
 		if(this.rand.nextInt(99) == 1 && !this.worldObj.isRemote) {
 			for(int i = 0; i < 3; i++) {
 				EntitySpider spider = new EntitySpider(this.worldObj);
 				spider.copyLocationAndAnglesFrom(entity);
 				this.worldObj.spawnEntityInWorld(spider);
 			}
-			return true;
 		}
-		return true;
-	}
-	
-	@Override
-	public void entityInit() {
-		super.entityInit();
-		this.dataWatcher.addObject(13, Integer.valueOf(0));
 	}
 	
 	@Override
 	public boolean canDespawn() {
 		return false;
-	}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setInteger("hasBeenAttacked", this.dataWatcher.getWatchableObjectInt(13));
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		this.dataWatcher.updateObject(13, tag.getInteger("hasBeenAttacked"));
-	}
-	
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float damage) {
-		super.attackEntityFrom(source, damage);
-		if(source instanceof EntityDamageSource) {
-			this.getDataWatcher().updateObject(13, Integer.valueOf(1));
-		}
-		return true;
 	}
 	
 	@Override
@@ -111,27 +77,27 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	public String getDeathSound() {
 		return "minibosses:crawlerdeath";
 	}
-	//I assume getDefaultState() is the correct method to use for setting a block now
+	
 	@Override
 	public void setDead() {
 		super.setDead();
 		
-		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && this.dataWatcher.getWatchableObjectInt(13) == 1) {
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 			World world = this.worldObj;
 			int x = MathHelper.floor_double(this.posX);
 			int y = MathHelper.floor_double(this.posY);
 			int z = MathHelper.floor_double(this.posZ);
 			
 			for(int i = 0; i < 9; i++) {
-				world.setBlockState(new BlockPos(x, y + i, z), Blocks.nether_brick_fence.getDefaultState()); //The variable i controls how far up the fence goes 
+				world.setBlock(x, y + i, z, Blocks.nether_brick_fence);
 			}
 			for(int j = 0; j < 3; j++) {
-				world.setBlockState(new BlockPos(x, y + 9, z + j), Blocks.nether_brick_fence.getDefaultState()); //Here j controls how far out the fences are placed
-				world.setBlockState(new BlockPos(x, y + 9 - j, z + 2), Blocks.web.getDefaultState()); //The variable "j" is there to lower the webs as they are placed
+				world.setBlock(x, y + 9, z + j, Blocks.nether_brick_fence);
+				world.setBlock(x, y + 9 - j, z + 2, Blocks.web);
 			}
-			world.setBlockState(new BlockPos(x, y + 6, z + 2), Blocks.chest.getDefaultState());
+			world.setBlock(x, y + 6, z + 2, Blocks.chest);
 			
-			TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y + 6, z + 2));
+			TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y + 6, z + 2);
 			
 			if(chest != null) {
 				ItemStack loot1 = new ItemStack(Items.diamond_sword);
@@ -160,16 +126,6 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "Crawler";
-	}
-
-	@Override
-	public ItemStack getPossibleLoot() {
-		return new ItemStack(MBItems.reviveHeart);
-	}
-
-	@Override
-	public int getDropChance() {
-		return 80;
 	}
 
 }

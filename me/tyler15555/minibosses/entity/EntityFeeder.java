@@ -21,18 +21,19 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityFeeder extends EntityMob implements IMiniboss {
+public class EntityFeeder extends EntityMob implements IRangedAttackMob, IMiniboss {
 
 	//TODO: Fix targeting errors, all features involving other mobs are temp disabled
 	
 	//public int imitatingEntityID;
+	
+	public EntityAIArrowAttack arrowAI = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	
 	public EntityFeeder(World par1World) {
 		super(par1World);
@@ -44,10 +45,10 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityCreeper.class, 1.0D, false));
 		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, 0, true));
+		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 0, true));
 	}
 	
 	/* DATA VALUE TABLE:
@@ -130,6 +131,14 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 		}
 	} */
 
+	//Just the skeletons arrow code without the enchantments
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase entity, float var2) {
+		EntityArrow entityarrow = new EntityArrow(this.worldObj, this, entity, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+		entityarrow.setDamage((double)(var2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
+		this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.worldObj.spawnEntityInWorld(entityarrow);
+	}
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
@@ -179,16 +188,6 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 	@Override
 	public String getBanlistName() {
 		return "Feeder";
-	}
-
-	@Override
-	public ItemStack getPossibleLoot() {
-		return new ItemStack(MBItems.medusaEye);
-	}
-
-	@Override
-	public int getDropChance() {
-		return 85;
 	}
 	
 }

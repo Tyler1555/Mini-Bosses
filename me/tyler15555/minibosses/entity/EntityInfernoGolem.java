@@ -8,7 +8,6 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
@@ -16,7 +15,7 @@ public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
 	public EntityInfernoGolem(World p_i1694_1_) {
 		super(p_i1694_1_);
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 	
 	@Override
@@ -25,28 +24,16 @@ public class EntityInfernoGolem extends EntityIronGolem implements IMiniboss {
 	}
 	
 	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		super.attackEntityAsMob(entity);
+	protected void attackEntity(Entity entity, float par2) {
+		super.attackEntity(entity, par2);
 		if(this.rand.nextInt(19) == 1) {
 			entity.setFire(8);
-			return true;
 		}
-		return true;
 	}
 
 	@Override
 	public String getBanlistName() {
 		return "InfernoGolem";
-	}
-
-	@Override
-	public ItemStack getPossibleLoot() {
-		return new ItemStack(MBItems.reviveHeart);
-	}
-
-	@Override
-	public int getDropChance() {
-		return 65;
 	}
 
 }

@@ -1,16 +1,12 @@
 package me.tyler15555.minibosses.network;
 
-import io.netty.buffer.ByteBuf;
-import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-
-
-
+import me.tyler15555.minibosses.util.ExtendedPlayerProperties;
+import io.netty.buffer.ByteBuf;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 //Heavily based on pahmir's MessageKeyPressed
 public class MessageKey implements IMessage, IMessageHandler<MessageKey, IMessage> {

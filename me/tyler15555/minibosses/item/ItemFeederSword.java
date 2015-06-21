@@ -9,8 +9,9 @@ import net.minecraft.item.ItemSword;
 public class ItemFeederSword extends ItemSword {
 
 	public ItemFeederSword() {
-		super(ToolMaterial.EMERALD); 
+		super(ToolMaterial.EMERALD);
 		setUnlocalizedName("feederSword");
+		setTextureName("minibosses:feeder_sword");
 	}
 	
 	@Override

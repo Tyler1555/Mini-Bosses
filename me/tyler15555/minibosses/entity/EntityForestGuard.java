@@ -2,9 +2,12 @@ package me.tyler15555.minibosses.entity;
 
 import java.util.ArrayList;
 
-import me.tyler15555.minibosses.item.MBItems;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import me.tyler15555.minibosses.util.IMiniboss;
+import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -21,17 +24,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-
-
 
 public class EntityForestGuard extends EntityMob implements IShearable, IMiniboss {
 	
@@ -42,7 +41,7 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		this.tasks.addTask(2, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(3, new EntityAILookIdle(this));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 	
 	@Override
@@ -81,7 +80,7 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		if(this.worldObj.isRaining() || this.isInWater()) {
 			this.addPotionEffect(new PotionEffect(Potion.regeneration.id, 500, 4));
 		}
-		if(this.worldObj.isDaytime() && this.worldObj.canBlockSeeSky(new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ))) {
+		if(this.worldObj.isDaytime() && this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) {
 			this.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 500, 4));
 		}
 	}
@@ -114,21 +113,22 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		super.setDead();
 		
 		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && this.getDataWatcher().getWatchableObjectInt(13) == 1) {
+			int treeSpawnCounter = 0;
 			int x = (int)this.posX;
 			int y = (int)this.posY;
 			int z = (int)this.posZ;
 			
 			for(int i = 0; i < 5; i++) {
-				this.worldObj.setBlockState(new BlockPos(x, y + i, z), Blocks.log.getDefaultState());
+				this.worldObj.setBlock(x, y + i, z, Blocks.log);
 			}
-			this.worldObj.setBlockState(new BlockPos(x, y + 5, z), Blocks.leaves.getDefaultState());
-			this.worldObj.setBlockState(new BlockPos(x + 1, y + 4, z), Blocks.leaves.getDefaultState());
-			this.worldObj.setBlockState(new BlockPos(x - 1, y + 4, z), Blocks.leaves.getDefaultState());
-			this.worldObj.setBlockState(new BlockPos(x, y + 4, z + 1), Blocks.leaves.getDefaultState());
-			this.worldObj.setBlockState(new BlockPos(x, y + 4, z - 1), Blocks.leaves.getDefaultState());
-			this.worldObj.setBlockState(new BlockPos(x, y + 6, z), Blocks.chest.getDefaultState());
+			this.worldObj.setBlock(x, y + 5, z, Blocks.leaves);
+			this.worldObj.setBlock(x + 1, y + 4, z, Blocks.leaves);
+			this.worldObj.setBlock(x - 1, y + 4, z, Blocks.leaves);
+			this.worldObj.setBlock(x, y + 4, z + 1, Blocks.leaves);
+			this.worldObj.setBlock(x, y + 4, z - 1, Blocks.leaves);
+			this.worldObj.setBlock(x, y + 6, z, Blocks.chest);
 			
-			TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(new BlockPos(x, y + 6, z));
+			TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(x, y + 6, z);
 			if(chest != null) {
 				ItemStack stack = new ItemStack(Items.diamond_axe);
 				EnchantmentHelper.addRandomEnchantment(rand, stack, 2);
@@ -140,12 +140,12 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
+	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
 		return this.getDataWatcher().getWatchableObjectInt(12) < 4;
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList();
 		
 		ret.add(new ItemStack(Blocks.leaves));
@@ -173,15 +173,5 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 	@Override
 	public String getBanlistName() {
 		return "ForestGuard";
-	}
-
-	@Override
-	public ItemStack getPossibleLoot() {
-		return new ItemStack(MBItems.dodgeGem);
-	}
-
-	@Override
-	public int getDropChance() {
-		return 60;
 	}
 }

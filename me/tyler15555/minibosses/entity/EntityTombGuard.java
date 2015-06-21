@@ -14,16 +14,13 @@ public class EntityTombGuard extends EntitySilverfish {
 	}
 	
 	@Override
-	public boolean attackEntityAsMob(Entity entity) { 
-		super.attackEntityAsMob(entity);
+	protected void attackEntity(Entity entity, float damage) { //Not entirely sure if that float parameter is correct
 		if(this.rand.nextInt(3) == 1 && entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer)entity;
 			int[] possibleEffects = new int[] {Potion.blindness.id, Potion.poison.id, Potion.digSlowdown.id, Potion.weakness.id, Potion.confusion.id};
 			
 			player.addPotionEffect(new PotionEffect(possibleEffects[this.rand.nextInt(possibleEffects.length)], 500, 4));
-			return true;
 		}
-		return true;
 	}
 
 }

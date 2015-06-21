@@ -7,6 +7,7 @@ import me.tyler15555.minibosses.block.MBBlocks;
 import me.tyler15555.minibosses.entity.EntityCrawler;
 import me.tyler15555.minibosses.entity.EntityFeeder;
 import me.tyler15555.minibosses.entity.EntityForestGuard;
+import me.tyler15555.minibosses.entity.EntityGlider;
 import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
@@ -18,13 +19,11 @@ import me.tyler15555.minibosses.entity.EntityWatcher;
 import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.network.PacketHandler;
 import me.tyler15555.minibosses.util.ConfigHelper;
-import me.tyler15555.minibosses.util.EntityFixEvents;
+import me.tyler15555.minibosses.util.MicroBossProperties;
 import me.tyler15555.minibosses.util.Resources;
-import me.tyler15555.tileentity.TileEntitySummoningPillar;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityGiantZombie;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -35,24 +34,24 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms.IMCEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.Logger;
 
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "MiniBosses", name = "Mini-Bosses", version = Resources.MOD_VERSION)
 public class MiniBosses {
@@ -71,8 +70,6 @@ public class MiniBosses {
 		event.getModLog().log(Level.INFO, "Mini-Bosses is starting to load!");
 		logger = event.getModLog();
 		
-		GameRegistry.registerTileEntity(TileEntitySummoningPillar.class, "MB-SummonPillar");
-		
 		ConfigHelper.setupConfig(new Configuration(event.getSuggestedConfigurationFile()), event.getModLog());
 		
 		Resources.setupArmorMaterials();
@@ -90,15 +87,9 @@ public class MiniBosses {
 		GameRegistry.registerItem(MBItems.infernoBoots, "infernoBoots"); 
 		GameRegistry.registerItem(MBItems.feederTooth, "feederTooth"); 
 		GameRegistry.registerItem(MBItems.feederSword, "feederSword"); 
-		GameRegistry.registerItem(MBItems.reviveHeart, "reviveHeart");
-		GameRegistry.registerItem(MBItems.medusaEye, "medusaEye");
-		GameRegistry.registerItem(MBItems.dodgeGem, "dodgeGem");
-		GameRegistry.registerItem(MBItems.summonScroll, "summonScroll");
-		GameRegistry.registerItem(MBItems.bloodTablet, "bloodTablet");
 		
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");
-		GameRegistry.registerBlock(MBBlocks.summoningPillar, "summoningPillar");
 	}
 	
 	@EventHandler
@@ -112,9 +103,6 @@ public class MiniBosses {
 		OreDictionary.registerOre("ingotInferno", MBItems.ingotInferno);
 		
 		MinecraftForge.EVENT_BUS.register(new MBEventHandler());
-		MinecraftForge.EVENT_BUS.register(new EntityFixEvents());
-		FMLCommonHandler.instance().bus().register(new CraftingHandler());
-		
 		
 		EntityRegistry.registerGlobalEntityID(EntityIronZombie.class, "MB-IronZombie", EntityRegistry.findGlobalUniqueEntityId(), Color.GRAY.getRGB(), Color.BLACK.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityCrawler.class, "MB-Crawler", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.BLACK.getRGB());
@@ -124,23 +112,24 @@ public class MiniBosses {
 		EntityRegistry.registerGlobalEntityID(EntityLivingBlock.class, "MB-LivingBlock", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "MB-Watcher", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.WHITE.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityFeeder.class, "MB-Feeder", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.WHITE.getRGB());
+		EntityRegistry.registerGlobalEntityID(EntityGlider.class, "DEBUG_ENTITY", EntityRegistry.findGlobalUniqueEntityId(), Color.BLACK.getRGB(), Color.BLACK.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntityTombGuard.class, "MB-TombGuard", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityInfernoGolem.class, "MB-InfernoGolem", EntityRegistry.findGlobalUniqueEntityId(), Color.RED.getRGB(), Color.LIGHT_GRAY.getRGB());
 		EntityRegistry.registerGlobalEntityID(EntitySprout.class, "MB-Sprout", EntityRegistry.findGlobalUniqueEntityId());
 		
-		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.PLAINS));
-		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.addSpawn(EntityForestGuard.class, ConfigHelper.forestGuardSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.FOREST));
-		EntityRegistry.addSpawn(EntityCrawler.class, ConfigHelper.crawlerSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.PLAINS));
-		EntityRegistry.addSpawn(EntityStealthCreeper.class, ConfigHelper.stealthCreeperSpawnRate, 1, 1, EnumCreatureType.CREATURE, BiomeDictionary.getBiomesForType(Type.JUNGLE));
-		EntityRegistry.addSpawn(EntityFeeder.class, 0, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.JUNGLE));
-		EntityRegistry.addSpawn(EntityInfernoGolem.class, ConfigHelper.infernoGolemSpawnRate, 1, 4, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
+		EntityRegistry.addSpawn(EntityIronZombie.class, ConfigHelper.ironZombieSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
+		EntityRegistry.addSpawn(EntitySuperSlime.class, ConfigHelper.superSlimeSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.addSpawn(EntityForestGuard.class, ConfigHelper.forestGuardSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.FOREST));
+		EntityRegistry.addSpawn(EntityCrawler.class, ConfigHelper.crawlerSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
+		EntityRegistry.addSpawn(EntityStealthCreeper.class, ConfigHelper.stealthCreeperSpawnRate, 1, 1, EnumCreatureType.creature, BiomeDictionary.getBiomesForType(Type.JUNGLE));
+		EntityRegistry.addSpawn(EntityFeeder.class, 0, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.JUNGLE));
+		EntityRegistry.addSpawn(EntityInfernoGolem.class, ConfigHelper.infernoGolemSpawnRate, 1, 4, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.NETHER));
 		
 		if(ConfigHelper.allowSlimeBlockCrafting) {
 			GameRegistry.addRecipe(new ItemStack(MBBlocks.blockSlime, 2), new Object[] {"sss", "sss", "sss", 's', Items.slime_ball});
 		}
 		if(ConfigHelper.enableGiantSpawn) {
-			EntityRegistry.addSpawn(EntityGiantZombie.class, ConfigHelper.giantSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.PLAINS));
+			EntityRegistry.addSpawn(EntityGiantZombie.class, ConfigHelper.giantSpawnRate, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.PLAINS));
 		}
 		if(ConfigHelper.addMiniBossesToDungeons) {
 			DungeonHooks.addDungeonMob("MB-IronZombie", 50);
@@ -157,8 +146,6 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoChest, new Object[] {"i i", "iii", "iii", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"})); 
-		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.bloodTablet), new Object[] {Blocks.quartz_block, Items.gold_ingot});
-		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.summonScroll), new Object[] {Items.paper, Items.bone, Items.bow});
 		
 		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}
@@ -170,7 +157,7 @@ public class MiniBosses {
 	
 	@EventHandler
 	public void handleIMC(IMCEvent event) {
-		for(net.minecraftforge.fml.common.event.FMLInterModComms.IMCMessage message : event.getMessages()) {
+		for(IMCMessage message : event.getMessages()) {
 			if(message.isStringMessage() && message.getStringValue().contains(":")) {
 				String[] data = message.getStringValue().split(":");
 				

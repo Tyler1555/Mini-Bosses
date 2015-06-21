@@ -1,5 +1,8 @@
 package me.tyler15555.minibosses.item;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import me.tyler15555.minibosses.common.MiniBosses;
 import me.tyler15555.minibosses.util.Resources;
 import net.minecraft.creativetab.CreativeTabs;
