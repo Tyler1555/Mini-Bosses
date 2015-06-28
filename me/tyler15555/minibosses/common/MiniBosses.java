@@ -71,8 +71,6 @@ public class MiniBosses {
 		event.getModLog().log(Level.INFO, "Mini-Bosses is starting to load!");
 		logger = event.getModLog();
 		
-		GameRegistry.registerTileEntity(TileEntitySummoningPillar.class, "MB-SummonPillar");
-		
 		ConfigHelper.setupConfig(new Configuration(event.getSuggestedConfigurationFile()), event.getModLog());
 		
 		Resources.setupArmorMaterials();
@@ -99,6 +97,8 @@ public class MiniBosses {
 		GameRegistry.registerBlock(MBBlocks.blockSlime, "blockSlime");
 		GameRegistry.registerBlock(MBBlocks.cryptStone, "cryptStone");
 		GameRegistry.registerBlock(MBBlocks.summoningPillar, "summoningPillar");
+		
+		GameRegistry.registerTileEntity(TileEntitySummoningPillar.class, "MB-SummonPillar");
 	}
 	
 	@EventHandler
@@ -157,8 +157,9 @@ public class MiniBosses {
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoChest, new Object[] {"i i", "iii", "iii", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoLegs, new Object[] {"iii", "i i", "i i", 'i', "ingotInferno"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(MBItems.infernoBoots, new Object[] {"xxx", "i i", "i i", 'i', "ingotInferno"})); 
-		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.bloodTablet), new Object[] {Blocks.quartz_block, Items.gold_ingot});
-		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.summonScroll), new Object[] {Items.paper, Items.bone, Items.bow});
+		GameRegistry.addRecipe(new ItemStack(MBBlocks.summoningPillar), new Object[] {"xxx", " x ", "xxx", 'x', Blocks.quartz_block});
+		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.summonScroll), new Object[] {Blocks.slime_block, Items.redstone, Items.paper, Blocks.slime_block, Blocks.slime_block, Blocks.slime_block});
+		GameRegistry.addShapelessRecipe(new ItemStack(MBItems.summonScroll), new Object[] {Blocks.iron_block, Blocks.iron_block, Items.paper, Items.rotten_flesh});
 		
 		GameRegistry.registerWorldGenerator(new MBWorldGenerator(), 1);
 	}

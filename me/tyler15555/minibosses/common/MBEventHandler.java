@@ -92,20 +92,22 @@ public class MBEventHandler {
 	
 	@SubscribeEvent
 	public void onBlockBreak(BreakEvent event) {
-		if(!event.world.isRemote && random.nextInt(199) == 1) {
-			if(event.world.getBlockState(event.pos).getBlock() == Blocks.dirt) { 
-				EntityLivingBlock livingBlock = new EntityLivingBlock(event.world);
-				
-				livingBlock.setBlockType(0);
-				livingBlock.setPosition(event.pos.getX(), event.pos.getY(), event.pos.getZ());
-				event.world.spawnEntityInWorld(livingBlock);
-			}
-			if(event.world.getBlockState(event.pos).getBlock() == Blocks.stone) {
-                EntityLivingBlock livingBlockStone = new EntityLivingBlock(event.world);
-				
-				livingBlockStone.setBlockType(1);
-				livingBlockStone.setPosition(event.pos.getX(), event.pos.getY(), event.pos.getZ());
-				event.world.spawnEntityInWorld(livingBlockStone);
+		if(ConfigHelper.enableLivingBlocks) {
+			if(!event.world.isRemote && random.nextInt(199) == 1) {
+				if(event.world.getBlockState(event.pos).getBlock() == Blocks.dirt) { 
+					EntityLivingBlock livingBlock = new EntityLivingBlock(event.world);
+					
+					livingBlock.setBlockType(0);
+					livingBlock.setPosition(event.pos.getX(), event.pos.getY(), event.pos.getZ());
+					event.world.spawnEntityInWorld(livingBlock);
+				}
+				if(event.world.getBlockState(event.pos).getBlock() == Blocks.stone) {
+	                EntityLivingBlock livingBlockStone = new EntityLivingBlock(event.world);
+					
+					livingBlockStone.setBlockType(1);
+					livingBlockStone.setPosition(event.pos.getX(), event.pos.getY(), event.pos.getZ());
+					event.world.spawnEntityInWorld(livingBlockStone);
+				}
 			}
 		}
 	}

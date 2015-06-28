@@ -2,7 +2,10 @@ package me.tyler15555.minibosses.util;
 
 import java.lang.reflect.InvocationTargetException;
 
+import me.tyler15555.minibosses.entity.EntitySuperSlime;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 
@@ -24,6 +27,10 @@ public class SummonEntry {
 		if(blood >= bCost && level >= lReq) {
 			Entity monster = (Entity) entityClass.getConstructor(World.class).newInstance(world);
 			monster.setPosition(x, y, z);
+			if(monster instanceof EntitySuperSlime) {
+				EntitySuperSlime slime = (EntitySuperSlime)monster;
+				slime.setSlimeSize(MathHelper.getRandomIntegerInRange(slime.getRNG(), 10, 15));
+			}
 			world.spawnEntityInWorld(monster);
 		}
 	}

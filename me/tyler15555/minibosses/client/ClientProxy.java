@@ -51,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTombGuard.class, new RenderTombGuard(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernoGolem.class, new RenderInfernoGolem(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout(Minecraft.getMinecraft().getRenderManager()));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySummoningPillar.class, new SummoningPillarRenderer());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySummoningPillar.class, new SummoningPillarRenderer());
 		MiniBosses.logger.log(Level.INFO, "Finished registering entity renderers!");
 		
 		MiniBosses.logger.log(Level.INFO, "Registering item/block renderers");
@@ -59,6 +59,7 @@ public class ClientProxy extends CommonProxy {
 		
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.cryptStone), 0, new ModelResourceLocation("minibosses:cryptStone", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.blockSlime), 0, new ModelResourceLocation("minibosses:blockSlime", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(MBBlocks.summoningPillar), 0, new ModelResourceLocation("miniBosses:summoningPillar", "inventory"));
 		
 		renderItem.getItemModelMesher().register(MBItems.ingotDarkIron, 0, new ModelResourceLocation("minibosses:ingotDarkIron", "inventory"));
 		renderItem.getItemModelMesher().register(MBItems.ingotInferno, 0, new ModelResourceLocation("minibosses:ingotInferno", "inventory"));

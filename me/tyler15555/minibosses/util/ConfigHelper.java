@@ -1,10 +1,9 @@
 package me.tyler15555.minibosses.util;
 
+import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 public class ConfigHelper {
 
@@ -27,7 +26,7 @@ public class ConfigHelper {
 	public static boolean addMiniBossesToDungeons;
 	public static boolean addLootToDungeons;
 	public static boolean ironZombieFix;
-	public static Property ironZombieFixProp;
+	public static boolean enableLivingBlocks;
 	
 	public static void setupConfig(Configuration config, Logger logger) {
 		try {
@@ -47,6 +46,7 @@ public class ConfigHelper {
 			addLootToDungeons = config.get("General", "addLootToDungeons", true).getBoolean(true);
 			powersEnabled = config.get("General", "powersEnabled", true).getBoolean(true);
 			ironZombieFix = config.getBoolean("IronZombieFix", "General", false, "Kills all iron zombies in the world. Should only be used once to fix iron zombies broken in 1.8!!!!");
+			enableLivingBlocks = config.getBoolean("enableLivingBlocks", "Spawning", true, "Enables/Disables living blocks from spawning.");
 		} catch(Exception e) {
 			logger.log(Level.ERROR, "A severe error has occured when attempting to load the config file for this mod! Some options may not be the way you set them!");
 		} finally {

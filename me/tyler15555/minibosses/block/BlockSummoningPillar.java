@@ -13,6 +13,7 @@ import me.tyler15555.tileentity.TileEntitySummoningPillar;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -49,7 +50,7 @@ public class BlockSummoningPillar extends BlockContainer {
 					e.printStackTrace();
 					return false;
 				} catch (ClassNotFoundException e) {
-					MiniBosses.logger.log(Level.WARN, "The entity class specified in this summon was not found! Ignoring...");
+					MiniBosses.logger.log(Level.WARN, "The entity class: " + summonData[0] + "specified in this summon was not found! Ignoring...");
 					e.printStackTrace();
 					return false;
 				} catch (InstantiationException e) {
@@ -77,5 +78,16 @@ public class BlockSummoningPillar extends BlockContainer {
 		return false;
 	}
 	
-	
+	@Override
+	public int getRenderType() {
+		return 3;
+	}
+	/*
+	@Override
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
+		TileEntitySummoningPillar pillar = (TileEntitySummoningPillar) worldIn.getTileEntity(pos);
+		//pillar.setPillarLevel(0);
+		return this.getDefaultState();
+	} */
 }

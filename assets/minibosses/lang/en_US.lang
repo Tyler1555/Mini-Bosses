@@ -29,5 +29,6 @@ item.summonScroll.name=Summon Scroll
 item.bloodTablet.name=Blood Tablet
 tile.blockSlime.name=Slime Block
 tile.cryptStone.name=Crypt Stone
+tile.summoningPillar.name=Summoning Pillar
 key.catagories.minibosses=Mini-Bosses' Key Bindings
 key.toggle.powers=Toggle Occulus Powers
