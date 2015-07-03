@@ -3,6 +3,7 @@ package me.tyler15555.minibosses.entity;
 import java.util.ArrayList;
 
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -130,7 +131,7 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 			
 			TileEntityChest chest = (TileEntityChest) this.worldObj.getTileEntity(new BlockPos(x, y + 6, z));
 			if(chest != null) {
-				ItemStack stack = new ItemStack(Items.diamond_axe);
+				ItemStack stack = this.getLoot();
 				EnchantmentHelper.addRandomEnchantment(rand, stack, 2);
 				chest.setInventorySlotContents(1, stack);
 				chest.setInventorySlotContents(0, new ItemStack(Blocks.sapling));
@@ -183,5 +184,9 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 	@Override
 	public int getDropChance() {
 		return 60;
+	}
+	
+	private ItemStack getLoot() {
+		return this.rand.nextInt(100) >= ConfigHelper.mobLootRarity ? new ItemStack(Items.diamond_axe) : new ItemStack(Items.iron_axe);
 	}
 }

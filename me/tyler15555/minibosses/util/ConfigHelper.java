@@ -27,6 +27,8 @@ public class ConfigHelper {
 	public static boolean addLootToDungeons;
 	public static boolean ironZombieFix;
 	public static boolean enableLivingBlocks;
+	public static int mobLootRarity;
+	public static boolean canFeederEatSword;
 	
 	public static void setupConfig(Configuration config, Logger logger) {
 		try {
@@ -47,6 +49,8 @@ public class ConfigHelper {
 			powersEnabled = config.get("General", "powersEnabled", true).getBoolean(true);
 			ironZombieFix = config.getBoolean("IronZombieFix", "General", false, "Kills all iron zombies in the world. Should only be used once to fix iron zombies broken in 1.8!!!!");
 			enableLivingBlocks = config.getBoolean("enableLivingBlocks", "Spawning", true, "Enables/Disables living blocks from spawning.");
+			mobLootRarity = config.getInt("MobLootRarity", "General", 50, 0, 100, "How rare the loot dropped by crawlers and forest guard's is. Higher numbers(X/100) means rarer items. ");
+			canFeederEatSword = config.getBoolean("CanFeederEatSword", "General", true, "Whether or not the feeder can eat your sword(1/40 chance of happening)");
 		} catch(Exception e) {
 			logger.log(Level.ERROR, "A severe error has occured when attempting to load the config file for this mod! Some options may not be the way you set them!");
 		} finally {

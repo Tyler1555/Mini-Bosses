@@ -1,7 +1,9 @@
 package me.tyler15555.minibosses.entity;
 
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.IMiniboss;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -13,6 +15,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -26,13 +29,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityFeeder extends EntityMob implements IMiniboss {
-
-	//TODO: Fix targeting errors, all features involving other mobs are temp disabled
 	
-	//public int imitatingEntityID;
+	public int imitatingEntityID;
+	private int eatCount;
+	private ItemStack[] stomachInv = new ItemStack[10];
 	
 	public EntityFeeder(World par1World) {
 		super(par1World);
@@ -59,7 +63,7 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 	@Override
 	public void entityInit() {
 		super.entityInit();
-		//this.getDataWatcher().addObject(12, Integer.valueOf(0));
+		this.getDataWatcher().addObject(12, Integer.valueOf(0));
 	}
 	
 	@Override
@@ -67,9 +71,9 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 		super.applyEntityAttributes();
 		this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.followRange).setBaseValue(9.5D);
 		this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).setBaseValue(150D);
-		this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.movementSpeed).setBaseValue(.625D);
+		this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.movementSpeed).setBaseValue(.425D);
 	}
-	/*
+	
 	@Override
 	public void onKillEntity(EntityLivingBase entity) {
 		super.onKillEntity(entity);
@@ -84,11 +88,22 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 			this.getDataWatcher().updateObject(12, Integer.valueOf(1));
 		}
 		if(entity instanceof IAnimals) {
-			this.heal(2.0F);
+			this.heal(10.0F);
 		}
-		
-	} */
-    /*
+		this.heal(5.0F);
+	}
+	
+	@Override
+	public void onDeath(DamageSource source) {
+		if(eatCount > 0) {
+			for(int index = 0; index < stomachInv.length; index++) {
+				ItemStack stack = stomachInv[index];
+				EntityItem itemEntity = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
+				this.worldObj.spawnEntityInWorld(itemEntity);
+			}
+		}
+	}
+    
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
@@ -113,45 +128,48 @@ public class EntityFeeder extends EntityMob implements IMiniboss {
 		super.onLivingUpdate();
 		
 		if(this.getImitatingEntityID() == 1) {
-			this.worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0, 0, 0);
+			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0, 0, 0);
 		}
 		if(this.getImitatingEntityID() == 2) {
-			this.worldObj.spawnParticle("portal", this.posX, this.posY, this.posZ, 0, 0, 0);
-			
-			if(!this.tasks.taskEntries.contains(arrowAI)) {
-				this.tasks.addTask(2, arrowAI);
-			}
+			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, this.posX, this.posY, this.posZ, 0, 0, 0);
 		}
 		if(this.getImitatingEntityID() == 3) {
-			this.worldObj.spawnParticle("explosion", this.posX, this.posY, this.posZ, 0, 0, 0);
+			this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, this.posX, this.posY, this.posZ, 0, 0, 0);
 		}
-		if(!(this.getImitatingEntityID() == 2) && this.tasks.taskEntries.contains(arrowAI)) {
-			this.tasks.removeTask(arrowAI);
+	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		super.attackEntityAsMob(entity);
+		if(entity instanceof EntityCreeper) {
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 100F); //Since usually the feeder will not be able to kill a creeper in time, it instakills it. Call it evolution.
 		}
-	} */
+		if(this.getImitatingEntityID() == 1 && this.rand.nextInt(19) == 1) {
+			if(entity instanceof EntityLiving) {
+				EntityLiving entityLiving = (EntityLiving)entity;
+				
+				entityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 500));
+			}
+		}
+		if(this.getImitatingEntityID() == 3 && this.rand.nextInt(29) == 1) {
+			this.worldObj.createExplosion(entity, entity.posX, entity.posY, entity.posZ, 3.5F, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+		} 
+		
+		return true;
+	}
 
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		super.attackEntityFrom(source, damage);
-		/*
-		if(this.getImitatingEntityID() == 1 && this.rand.nextInt(19) == 1) {
-			if(source.getEntity() != null && source.getEntity() instanceof EntityLiving) {
-				EntityLiving entity = (EntityLiving)source.getEntity();
-				
-				entity.addPotionEffect(new PotionEffect(Potion.poison.id, 500));
-			}
-		}
-		if(this.getImitatingEntityID() == 3 && source.getEntity() != null && this.rand.nextInt(29) == 1) {
-			this.worldObj.createExplosion(source.getEntity(), source.getEntity().posX, source.getEntity().posY, source.getEntity().posZ, 3.5F, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
-		} */
-		
-		if(source.getEntity() != null && source.getEntity() instanceof EntityPlayer && this.rand.nextInt(19) == 1) {
+		if(source.getEntity() != null && source.getEntity() instanceof EntityPlayer  && this.rand.nextInt(40) == 1 && ConfigHelper.canFeederEatSword) {
 			EntityPlayer player = (EntityPlayer)source.getEntity();
 			
+			stomachInv[eatCount] = player.getHeldItem();
+			eatCount++;
 			player.destroyCurrentEquippedItem();
 			this.heal(4);
-		}
+		} 
 		
 		return true;
 	}

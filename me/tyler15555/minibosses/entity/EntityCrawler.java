@@ -1,6 +1,7 @@
 package me.tyler15555.minibosses.entity;
 
 import me.tyler15555.minibosses.item.MBItems;
+import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -134,7 +135,7 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 			TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y + 6, z + 2));
 			
 			if(chest != null) {
-				ItemStack loot1 = new ItemStack(Items.diamond_sword);
+				ItemStack loot1 = this.getLoot();
 				ItemStack loot2 = new ItemStack(Items.golden_apple);
 				ItemStack loot3 = new ItemStack(Items.experience_bottle, this.rand.nextInt(2) + 1);
 				
@@ -170,6 +171,10 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	@Override
 	public int getDropChance() {
 		return 80;
+	}
+	
+	private ItemStack getLoot() {
+		return this.rand.nextInt(100) >= ConfigHelper.mobLootRarity ? new ItemStack(Items.diamond_sword) : new ItemStack(Items.iron_sword);
 	}
 
 }

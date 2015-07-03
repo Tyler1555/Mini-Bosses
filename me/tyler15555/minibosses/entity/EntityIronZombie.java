@@ -125,7 +125,7 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 	@Override
 	public void setDead() {
 		super.setDead();
-		if(this.getHeldItem() != null) {
+		if(this.getHeldItem() != null && FMLCommonHandler.instance().getSide() == Side.SERVER) {
 			this.dropItem(this.getHeldItem().getItem(), 1);
 		}
 	}
