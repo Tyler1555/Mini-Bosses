@@ -56,11 +56,6 @@ public class EntityWatcher extends EntityMob implements IMiniboss {
 	public Item getDropItem() {
 		return MBItems.occulus_item;
 	}
-	
-	@Override
-	public boolean canDespawn() {
-		return false;
-	}
 
 	@Override
 	public String getBanlistName() {

@@ -85,11 +85,6 @@ public class EntitySuperSlime extends EntitySlime implements IMiniboss {
 			this.dropItem(Items.slime_ball, this.rand.nextInt(9));
 		}
 	}
-	
-	@Override
-	public boolean canDespawn() {
-		return false;
-	}
 
 	@Override
 	public String getBanlistName() {

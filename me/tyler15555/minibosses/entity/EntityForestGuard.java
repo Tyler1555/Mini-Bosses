@@ -165,11 +165,6 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 			return super.getCanSpawnHere();
 		}
 	} */
-	
-	@Override
-	public boolean canDespawn() {
-		return false;
-	}
 
 	@Override
 	public String getBanlistName() {

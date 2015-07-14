@@ -74,11 +74,6 @@ public class EntityLivingBlock extends EntityMob implements IMiniboss {
 	}
 	
 	@Override
-	public boolean canDespawn() {
-		return false;
-	}
-
-	@Override
 	public String getBanlistName() {
 		return "LivingBlock";
 	}

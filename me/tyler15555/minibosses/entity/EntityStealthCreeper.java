@@ -47,11 +47,6 @@ public class EntityStealthCreeper extends EntityCreeper implements IMiniboss {
 		}
 		return super.getCanSpawnHere();
 	} */
-	
-	@Override
-	public boolean canDespawn() {
-		return false;
-	}
 
 	@Override
 	public String getBanlistName() {

@@ -65,11 +65,6 @@ public class EntityCrawler extends EntityMob implements IMiniboss {
 	}
 	
 	@Override
-	public boolean canDespawn() {
-		return false;
-	}
-	
-	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("hasBeenAttacked", this.dataWatcher.getWatchableObjectInt(13));

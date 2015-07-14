@@ -118,11 +118,6 @@ public class EntityIronZombie extends EntityZombie implements IMiniboss {
 	}
 	
 	@Override
-	public boolean canDespawn() {
-		return false;
-	}
-	
-	@Override
 	public void setDead() {
 		super.setDead();
 		if(this.getHeldItem() != null && FMLCommonHandler.instance().getSide() == Side.SERVER) {
