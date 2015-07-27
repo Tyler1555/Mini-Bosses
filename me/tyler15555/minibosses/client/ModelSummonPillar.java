@@ -3,7 +3,7 @@ package me.tyler15555.minibosses.client;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
+//Unused as of now in favor of a JSON model. May be used in the future
 public class ModelSummonPillar extends ModelBase {
   
     ModelRenderer pillarBase1;
