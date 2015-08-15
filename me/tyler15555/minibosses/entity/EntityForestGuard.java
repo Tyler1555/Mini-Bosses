@@ -6,6 +6,7 @@ import me.tyler15555.minibosses.item.MBItems;
 import me.tyler15555.minibosses.util.ConfigHelper;
 import me.tyler15555.minibosses.util.IMiniboss;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -74,6 +75,11 @@ public class EntityForestGuard extends EntityMob implements IShearable, IMinibos
 		super.readFromNBT(tag);
 		this.getDataWatcher().updateObject(12, Integer.valueOf(tag.getInteger("shearCount")));
 		this.dataWatcher.updateObject(13, Integer.valueOf(tag.getInteger("hasBeenAttacked")));
+	}
+	
+	@Override
+	public void knockBack(Entity p_70653_1_, float p_70653_2_, double p_70653_3_, double p_70653_5_) {
+		return; //Stops knockback from occuring
 	}
 	
 	@Override

@@ -10,6 +10,7 @@ import me.tyler15555.minibosses.entity.EntityInfernoGolem;
 import me.tyler15555.minibosses.entity.EntityIronZombie;
 import me.tyler15555.minibosses.entity.EntityLivingBlock;
 import me.tyler15555.minibosses.entity.EntitySprout;
+import me.tyler15555.minibosses.entity.EntityStalker;
 import me.tyler15555.minibosses.entity.EntitySuperSlime;
 import me.tyler15555.minibosses.entity.EntityTombGuard;
 import me.tyler15555.minibosses.entity.EntityWatcher;
@@ -51,7 +52,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTombGuard.class, new RenderTombGuard(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInfernoGolem.class, new RenderInfernoGolem(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout(Minecraft.getMinecraft().getRenderManager()));
-		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySummoningPillar.class, new SummoningPillarRenderer());
+		//RenderingRegistry.registerEntityRenderingHandler(EntityStalker.class, new RenderStalker());
 		MiniBosses.logger.log(Level.INFO, "Finished registering entity renderers!");
 		
 		MiniBosses.logger.log(Level.INFO, "Registering item/block renderers");
